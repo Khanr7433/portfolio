@@ -167,8 +167,9 @@ export const Experience: React.FC = () => {
         >
             {/* Background decoration */}
             <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-1/4 left-10 w-32 h-32 bg-blue-400/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-1/4 right-10 w-32 h-32 bg-purple-400/10 rounded-full blur-3xl"></div>
+                <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-400/5 to-purple-400/5 rounded-full blur-3xl"></div>
             </div>
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -176,7 +177,7 @@ export const Experience: React.FC = () => {
                 <div className="text-center mb-16">
                     <h2
                         ref={titleRef}
-                        className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
+                        className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-4"
                     >
                         Work Experience
                     </h2>
@@ -186,6 +187,9 @@ export const Experience: React.FC = () => {
                     >
                         My professional journey in software development
                     </p>
+                    <div className="mt-6 flex justify-center">
+                        <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                    </div>
                 </div>
 
                 {/* Timeline */}

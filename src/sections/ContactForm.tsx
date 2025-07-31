@@ -130,7 +130,7 @@ const ContactForm: React.FC = () => {
                 <div className="text-center mb-16">
                     <h2
                         ref={titleRef}
-                        className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
+                        className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-4"
                     >
                         Get In Touch
                     </h2>
@@ -138,6 +138,9 @@ const ContactForm: React.FC = () => {
                         Have a project in mind? Let&apos;s discuss how we can
                         work together to bring your ideas to life.
                     </p>
+                    <div className="mt-6 flex justify-center">
+                        <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                    </div>
                 </div>
 
                 <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">

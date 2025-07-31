@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GraduationCap, MapPin, Award, BookOpen } from "lucide-react";
-import { education } from "@/constants/education";
+import { education } from "../constants/education";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -84,13 +84,13 @@ const EducationCard: React.FC<EducationCardProps> = ({
         <div className="relative flex items-center justify-center">
             {/* Timeline dot and line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
-                <div className="w-5 h-5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full border-4 border-white dark:border-gray-900 shadow-lg z-10 flex items-center justify-center">
-                    <GraduationCap className="w-2.5 h-2.5 text-white" />
+                <div className="w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full border-4 border-white dark:border-gray-900 shadow-lg z-10 flex items-center justify-center">
+                    <GraduationCap className="w-2 h-2 text-white" />
                 </div>
                 {!isLast && (
                     <div
                         ref={lineRef}
-                        className="w-0.5 h-32 bg-gradient-to-b from-blue-500 to-purple-600 mt-2"
+                        className="w-0.5 h-24 bg-gradient-to-b from-blue-500 to-purple-600 mt-2"
                     ></div>
                 )}
             </div>
@@ -98,7 +98,7 @@ const EducationCard: React.FC<EducationCardProps> = ({
             {/* Content */}
             <div
                 ref={cardRef}
-                className={`w-full max-w-lg ${
+                className={`w-full max-w-md ${
                     index % 2 === 0 ? "mr-auto pr-8" : "ml-auto pl-8"
                 }`}
             >
@@ -248,9 +248,9 @@ const Education: React.FC = () => {
         >
             {/* Background decoration */}
             <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-1/4 left-10 w-32 h-32 bg-blue-400/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-1/4 right-10 w-32 h-32 bg-purple-400/10 rounded-full blur-3xl"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-green-400/5 rounded-full blur-3xl"></div>
+                <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-400/5 to-purple-400/5 rounded-full blur-3xl"></div>
             </div>
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -258,7 +258,7 @@ const Education: React.FC = () => {
                 <div className="text-center mb-16">
                     <h2
                         ref={titleRef}
-                        className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
+                        className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-4"
                     >
                         Education
                     </h2>
@@ -268,6 +268,9 @@ const Education: React.FC = () => {
                     >
                         My academic journey and educational achievements
                     </p>
+                    <div className="mt-6 flex justify-center">
+                        <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                    </div>
                 </div>
 
                 {/* Timeline */}

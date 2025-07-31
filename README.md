@@ -1,6 +1,10 @@
-# Modern Animated Portfolio - Rashid Khan
+# ✨ Modern Animated Portfolio - Rashid Khan
 
 A stunning, modern portfolio website built with Next.js 15, TypeScript, Tailwind CSS, and GSAP animations. Features smooth animations, dark mode support, responsive design, and a clean, professional layout.
+
+## 🌐 Live Demo
+
+> **[🚀 View Live Portfolio](https://portfolio-black-chi-69.vercel.app)**
 
 ## 🚀 Features
 
