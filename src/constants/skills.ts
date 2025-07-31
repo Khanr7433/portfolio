@@ -1,0 +1,70 @@
+export const skills = {
+    technicalSkills: {
+        programming: [
+            {
+                category: "Frontend",
+                skills: [
+                    "JavaScript",
+                    "TypeScript",
+                    "React",
+                    "Next.js",
+                    "HTML",
+                    "CSS",
+                    "Tailwind CSS",
+                    "Vite",
+                ],
+            },
+            {
+                category: "Backend",
+                skills: [
+                    "Node.js",
+                    "Express.js",
+                    "Django",
+                    "JWT",
+                    "bcryptjs",
+                    "PHP",
+                    "Java",
+                    "C/C++",
+                    "Python",
+                ],
+            },
+            {
+                category: "Mobile Development",
+                skills: ["Android Development (Java)", "React Native"],
+            },
+            {
+                category: "Real-time Technologies",
+                skills: ["Socket.io"],
+            },
+            {
+                category: "APIs & Libraries",
+                skills: [
+                    "Axios",
+                    "REST APIs",
+                    "Mongoose",
+                    "Nodemailer",
+                    "Multer",
+                    "Cloudinary",
+                ],
+            },
+        ],
+        databases: ["MongoDB", "PostgreSQL", "MySQL", "SQLite3"],
+        operatingSystems: ["Windows", "Linux"],
+    },
+    softSkills: [
+        "Team Leadership",
+        "Project Management",
+        "Problem Solving",
+        "Communication",
+        "Operating Systems Knowledge",
+        "Networking Fundamentals",
+        "Full Stack Development",
+        "Real-time Application Development",
+        "Authentication & Authorization",
+        "API Integration",
+        "Responsive Web Design",
+        "Version Control (Git)",
+        "Deployment & DevOps",
+    ],
+    languages: ["English", "Urdu", "Hindi", "Marathi"],
+};
