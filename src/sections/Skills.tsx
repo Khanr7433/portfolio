@@ -32,7 +32,6 @@ const SkillCategory: React.FC<SkillCategoryProps> = ({
     title,
     icon: Icon,
     skills,
-    color,
     bgGradient,
     index,
 }) => {
@@ -319,7 +318,7 @@ const Skills: React.FC = () => {
         <section
             id="skills"
             ref={sectionRef}
-            className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-slate-900 relative overflow-hidden"
+            className="py-20 bg-gradient-to-br from-gray-900 to-slate-900 relative overflow-hidden"
         >
             {/* Background decoration */}
             <div className="absolute inset-0 overflow-hidden">

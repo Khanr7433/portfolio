@@ -227,7 +227,7 @@ const Tools: React.FC = () => {
         <section
             id="tools"
             ref={sectionRef}
-            className="py-20 bg-white dark:bg-gray-900 relative overflow-hidden"
+            className="py-20 bg-gray-900 relative overflow-hidden"
         >
             {/* Background decoration */}
             <div className="absolute inset-0 overflow-hidden">

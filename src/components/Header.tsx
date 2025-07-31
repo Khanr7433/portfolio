@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import { gsap } from "gsap";
-import { Menu, X, Github, Linkedin, Mail, Sun, Moon } from "lucide-react";
+import { Menu, X, Github, Linkedin, Mail } from "lucide-react";
 import { profile } from "@/constants/profile";
 
 const Header: React.FC = () => {
@@ -11,19 +11,22 @@ const Header: React.FC = () => {
     const navRef = useRef<HTMLElement>(null);
     const mobileMenuRef = useRef<HTMLDivElement>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isDarkMode, setIsDarkMode] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState("home");
 
-    const navItems = [
-        { name: "Home", href: "#home" },
-        { name: "About", href: "#about" },
-        { name: "Skills", href: "#skills" },
-        { name: "Tools", href: "#tools" },
-        { name: "Projects", href: "#projects" },
-        { name: "Experience", href: "#experience" },
-        { name: "Education", href: "#education" },
-        { name: "Contact", href: "#contact" },
-    ];
+    const navItems = useMemo(
+        () => [
+            { name: "Home", href: "#home" },
+            { name: "About", href: "#about" },
+            { name: "Skills", href: "#skills" },
+            { name: "Tools", href: "#tools" },
+            { name: "Projects", href: "#projects" },
+            { name: "Experience", href: "#experience" },
+            { name: "Education", href: "#education" },
+            { name: "Contact", href: "#contact-form" },
+        ],
+        []
+    );
 
     const socialLinks = [
         { icon: Github, href: profile.social.github, label: "GitHub" },
@@ -56,29 +59,102 @@ const Header: React.FC = () => {
             "-=0.4"
         );
 
-        // Scroll effect
+        // Scroll effect and fallback active section detection
         const handleScroll = () => {
             const scrollY = window.scrollY;
             setIsScrolled(scrollY > 50);
+
+            // Fallback: Manual section detection based on scroll position
+            const sections = navItems
+                .map((item) => {
+                    const element = document.querySelector(item.href);
+                    if (element) {
+                        const rect = element.getBoundingClientRect();
+                        return {
+                            id: item.href.substring(1),
+                            offsetTop: rect.top + scrollY,
+                            height: rect.height,
+                        };
+                    }
+                    return null;
+                })
+                .filter(
+                    (
+                        section
+                    ): section is {
+                        id: string;
+                        offsetTop: number;
+                        height: number;
+                    } => section !== null
+                );
+
+            const currentScrollPosition = scrollY + 150; // Account for header height
+
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = sections[i];
+                if (section && currentScrollPosition >= section.offsetTop) {
+                    setActiveSection(section.id);
+                    break;
+                }
+            }
         };
 
         window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+
+        // Active section detection with improved logic
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: "-20% 0px -60% 0px",
+        };
+
+        const observerCallback = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const targetElement = entry.target as HTMLElement;
+                    if (targetElement && targetElement.id) {
+                        setActiveSection(targetElement.id);
+                    }
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(
+            observerCallback,
+            observerOptions
+        );
+
+        // Add a slight delay to ensure DOM is ready
+        const timer = setTimeout(() => {
+            // Observe all sections
+            navItems.forEach((item) => {
+                const sectionId = item.href.substring(1); // Remove the #
+                const element = document.querySelector(`#${sectionId}`);
+                if (element) {
+                    observer.observe(element);
+                } else {
+                    console.warn(`Section with id "${sectionId}" not found`);
+                }
+            });
+        }, 100);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            observer.disconnect();
+            clearTimeout(timer);
+        };
+    }, [navItems]);
 
     useEffect(() => {
         // Animate header background on scroll
         gsap.to(headerRef.current, {
             backgroundColor: isScrolled
-                ? isDarkMode
-                    ? "rgba(17, 24, 39, 0.95)"
-                    : "rgba(255, 255, 255, 0.95)"
+                ? "rgba(17, 24, 39, 0.95)"
                 : "transparent",
             backdropFilter: isScrolled ? "blur(10px)" : "none",
             duration: 0.3,
             ease: "power2.out",
         });
-    }, [isScrolled, isDarkMode]);
+    }, [isScrolled]);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -102,11 +178,6 @@ const Header: React.FC = () => {
                 ease: "power2.in",
             });
         }
-    };
-
-    const toggleTheme = () => {
-        setIsDarkMode(!isDarkMode);
-        document.documentElement.classList.toggle("dark");
     };
 
     const handleNavClick = (href: string) => {
@@ -148,20 +219,34 @@ const Header: React.FC = () => {
                         ref={navRef}
                         className="hidden lg:flex items-center space-x-8"
                     >
-                        {navItems.map((item, index) => (
-                            <a
-                                key={index}
-                                href={item.href}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    handleNavClick(item.href);
-                                }}
-                                className="relative text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors duration-300 group"
-                            >
-                                {item.name}
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 group-hover:w-full transition-all duration-300"></span>
-                            </a>
-                        ))}
+                        {navItems.map((item, index) => {
+                            const isActive =
+                                activeSection === item.href.substring(1);
+                            return (
+                                <a
+                                    key={index}
+                                    href={item.href}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleNavClick(item.href);
+                                    }}
+                                    className={`relative font-medium transition-colors duration-300 group ${
+                                        isActive
+                                            ? "text-blue-600 dark:text-blue-400"
+                                            : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                                    }`}
+                                >
+                                    {item.name}
+                                    <span
+                                        className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 ${
+                                            isActive
+                                                ? "w-full"
+                                                : "w-0 group-hover:w-full"
+                                        }`}
+                                    ></span>
+                                </a>
+                            );
+                        })}
                     </nav>
 
                     {/* Social Links & Theme Toggle */}
@@ -178,32 +263,10 @@ const Header: React.FC = () => {
                                 <social.icon size={20} />
                             </a>
                         ))}
-                        <button
-                            onClick={toggleTheme}
-                            className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transform hover:scale-110 transition-all duration-300"
-                            aria-label="Toggle theme"
-                        >
-                            {isDarkMode ? (
-                                <Sun size={20} />
-                            ) : (
-                                <Moon size={20} />
-                            )}
-                        </button>
                     </div>
 
                     {/* Mobile Menu Button */}
                     <div className="lg:hidden flex items-center space-x-2">
-                        <button
-                            onClick={toggleTheme}
-                            className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
-                            aria-label="Toggle theme"
-                        >
-                            {isDarkMode ? (
-                                <Sun size={20} />
-                            ) : (
-                                <Moon size={20} />
-                            )}
-                        </button>
                         <button
                             onClick={toggleMenu}
                             className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
@@ -221,19 +284,27 @@ const Header: React.FC = () => {
                         className="lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg border-t border-gray-200 dark:border-gray-700"
                     >
                         <nav className="px-4 py-6 space-y-4">
-                            {navItems.map((item, index) => (
-                                <a
-                                    key={index}
-                                    href={item.href}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        handleNavClick(item.href);
-                                    }}
-                                    className="block text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
-                                >
-                                    {item.name}
-                                </a>
-                            ))}
+                            {navItems.map((item, index) => {
+                                const isActive =
+                                    activeSection === item.href.substring(1);
+                                return (
+                                    <a
+                                        key={index}
+                                        href={item.href}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleNavClick(item.href);
+                                        }}
+                                        className={`block text-lg font-medium transition-colors duration-300 ${
+                                            isActive
+                                                ? "text-blue-600 dark:text-blue-400"
+                                                : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                                        }`}
+                                    >
+                                        {item.name}
+                                    </a>
+                                );
+                            })}
                             <div className="flex items-center space-x-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                                 {socialLinks.map((social, index) => (
                                     <a

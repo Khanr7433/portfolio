@@ -244,7 +244,7 @@ const Education: React.FC = () => {
         <section
             id="education"
             ref={sectionRef}
-            className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-slate-900 relative overflow-hidden"
+            className="py-20 bg-gradient-to-br from-gray-800 to-slate-900 relative overflow-hidden"
         >
             {/* Background decoration */}
             <div className="absolute inset-0 overflow-hidden">

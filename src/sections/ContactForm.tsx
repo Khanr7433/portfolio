@@ -117,7 +117,7 @@ const ContactForm: React.FC = () => {
         <section
             id="contact-form"
             ref={sectionRef}
-            className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 relative overflow-hidden"
+            className="py-20 bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden"
         >
             {/* Background decoration */}
             <div className="absolute inset-0 overflow-hidden">

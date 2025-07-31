@@ -75,7 +75,7 @@ const Footer: React.FC = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div ref={contentRef}>
                     {/* Main Footer Content */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                         {/* About Section */}
                         <div className="lg:col-span-2">
                             <div className="flex items-center mb-6">
@@ -112,93 +112,63 @@ const Footer: React.FC = () => {
                         </div>
 
                         {/* Quick Links */}
-                        <div>
-                            <h4 className="text-lg font-semibold text-white mb-6">
-                                Quick Links
-                            </h4>
-                            <ul className="space-y-3">
-                                {quickLinks.map((link, index) => (
-                                    <li key={index}>
-                                        <a
-                                            href={link.href}
-                                            className="text-gray-300 hover:text-white transition-colors duration-300 hover:translate-x-1 transform inline-block"
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                const element =
-                                                    document.querySelector(
-                                                        link.href
-                                                    );
-                                                if (element) {
-                                                    element.scrollIntoView({
-                                                        behavior: "smooth",
-                                                    });
-                                                }
-                                            }}
-                                        >
-                                            {link.name}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Contact Info */}
-                        <div>
-                            <h4 className="text-lg font-semibold text-white mb-6">
-                                Get In Touch
-                            </h4>
-                            <div className="space-y-4">
-                                <div>
-                                    <p className="text-gray-300">Email</p>
-                                    <a
-                                        href={`mailto:${profile.basics.contact.email}`}
-                                        className="text-blue-400 hover:text-blue-300 transition-colors duration-300"
-                                    >
-                                        {profile.basics.contact.email}
-                                    </a>
-                                </div>
-                                <div>
-                                    <p className="text-gray-300">Phone</p>
-                                    <a
-                                        href={`tel:${profile.basics.contact.phone}`}
-                                        className="text-blue-400 hover:text-blue-300 transition-colors duration-300"
-                                    >
-                                        {profile.basics.contact.phone}
-                                    </a>
-                                </div>
-                                <div>
-                                    <p className="text-gray-300">Location</p>
-                                    <p className="text-white">
-                                        {profile.basics.location.city},{" "}
-                                        {profile.basics.location.state}
-                                    </p>
-                                </div>
+                        <div className="flex justify-center md:justify-start">
+                            <div className="w-full max-w-xs">
+                                <h4 className="text-xl font-semibold text-white mb-8 text-center md:text-left">
+                                    Navigation
+                                </h4>
+                                <ul className="grid grid-cols-2 gap-y-4 gap-x-6">
+                                    {quickLinks.map((link, index) => (
+                                        <li key={index}>
+                                            <a
+                                                href={link.href}
+                                                className="group relative text-gray-300 hover:text-white transition-all duration-300 font-medium flex items-center gap-2"
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    const element =
+                                                        document.querySelector(
+                                                            link.href
+                                                        );
+                                                    if (element) {
+                                                        element.scrollIntoView({
+                                                            behavior: "smooth",
+                                                        });
+                                                    }
+                                                }}
+                                            >
+                                                <span className="w-2 h-2 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                                                <span className="group-hover:translate-x-1 transform transition-transform duration-300">
+                                                    {link.name}
+                                                </span>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                         </div>
                     </div>
 
                     {/* Bottom Bar */}
-                    <div className="pt-8 border-t border-gray-700/50">
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                            <div className="flex items-center gap-2 text-gray-300">
+                    <div className="pt-8 border-t border-gray-700/50 relative">
+                        <div className="flex items-center justify-center">
+                            <div className="flex items-center gap-2 text-gray-300 text-base font-medium">
                                 <span>Made with</span>
                                 <Heart className="w-4 h-4 text-red-500 animate-pulse" />
-                                <span>by {profile.basics.name}</span>
+                                <span>by</span>
+                                <span className="text-white font-semibold">
+                                    {profile.basics.name}
+                                </span>
                             </div>
-
-                            <div className="text-gray-400 text-sm">
-                                © {new Date().getFullYear()}{" "}
-                                {profile.basics.name}. All rights reserved.
-                            </div>
-
-                            <button
-                                onClick={scrollToTop}
-                                className="group p-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-110"
-                                aria-label="Scroll to top"
-                            >
-                                <ArrowUp className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors duration-300" />
-                            </button>
                         </div>
+
+                        {/* Scroll to Top Button - Positioned on the right side */}
+                        <button
+                            onClick={scrollToTop}
+                            className="group absolute right-0 top-1/2 transform -translate-y-1/2 p-3 bg-gradient-to-r from-blue-500/20 to-purple-600/20 backdrop-blur-sm rounded-lg border border-blue-400/30 hover:border-blue-400/50 hover:from-blue-500/30 hover:to-purple-600/30 transition-all duration-300 hover:scale-110"
+                            aria-label="Scroll to top"
+                        >
+                            <ArrowUp className="w-5 h-5 text-blue-400 group-hover:text-white transition-colors duration-300" />
+                        </button>
                     </div>
                 </div>
             </div>

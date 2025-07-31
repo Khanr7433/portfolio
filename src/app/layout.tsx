@@ -46,7 +46,7 @@ export function generateViewport() {
     return {
         width: "device-width",
         initialScale: 1,
-        themeColor: "#3b82f6",
+        themeColor: "#111827",
     };
 }
 
@@ -56,7 +56,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className="scroll-smooth">
+        <html lang="en" className="scroll-smooth dark">
             <head>
                 <link rel="icon" href="/favicon.ico" />
                 <link
@@ -76,10 +76,10 @@ export default function RootLayout({
                     sizes="16x16"
                     href="/favicon-16x16.png"
                 />
-                <meta name="theme-color" content="#3b82f6" />
+                <meta name="theme-color" content="#111827" />
             </head>
             <body
-                className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300`}
+                className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-gray-900 text-white transition-colors duration-300`}
             >
                 {children}
             </body>

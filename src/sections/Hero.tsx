@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ChevronDown, Download, Play } from "lucide-react";
+import { Play } from "lucide-react";
 import { profile } from "@/constants/profile";
 
 const Hero: React.FC = () => {
@@ -11,7 +11,6 @@ const Hero: React.FC = () => {
     const subtitleRef = useRef<HTMLDivElement>(null);
     const descriptionRef = useRef<HTMLParagraphElement>(null);
     const ctaRef = useRef<HTMLDivElement>(null);
-    const scrollIndicatorRef = useRef<HTMLDivElement>(null);
     const backgroundRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -53,22 +52,7 @@ const Hero: React.FC = () => {
                     ease: "power2.out",
                 },
                 "-=0.2"
-            )
-            .fromTo(
-                scrollIndicatorRef.current,
-                { y: 20, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" },
-                "-=0.1"
             );
-
-        // Floating animation for scroll indicator
-        gsap.to(scrollIndicatorRef.current, {
-            y: 10,
-            duration: 2,
-            repeat: -1,
-            yoyo: true,
-            ease: "power2.inOut",
-        });
 
         // Parallax effect on scroll
         gsap.to(backgroundRef.current, {
@@ -122,18 +106,6 @@ const Hero: React.FC = () => {
         setTimeout(typewriterEffect, 1500);
     }, []);
 
-    const handleScrollDown = () => {
-        const nextSection = document.querySelector("#about");
-        if (nextSection) {
-            nextSection.scrollIntoView({ behavior: "smooth" });
-        }
-    };
-
-    const handleDownloadCV = () => {
-        // Add CV download logic here
-        console.log("Download CV clicked");
-    };
-
     const handleViewProjects = () => {
         const projectsSection = document.querySelector("#projects");
         if (projectsSection) {
@@ -145,16 +117,11 @@ const Hero: React.FC = () => {
         <section
             id="home"
             ref={heroRef}
-            className="relative min-h-screen flex items-center justify-center overflow-hidden"
+            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
         >
-            {/* Background */}
-            <div
-                ref={backgroundRef}
-                className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
-            >
-                <div className="absolute inset-0 opacity-20">
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
-                </div>
+            {/* Background Elements */}
+            <div ref={backgroundRef} className="absolute inset-0 opacity-20">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
 
                 {/* Animated gradient orbs */}
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
@@ -163,23 +130,23 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <div className="max-w-4xl mx-auto">
+            <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center min-h-screen">
+                <div className="max-w-4xl mx-auto text-center">
                     {/* Main Title */}
                     <h1
                         ref={titleRef}
-                        className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-6"
+                        className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-4 leading-tight"
                     >
-                        Hello, I&apos;m{" "}
-                        <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        <div className="mb-1">Hello, I&apos;m</div>
+                        <div className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                             {profile.basics.name}
-                        </span>
+                        </div>
                     </h1>
 
                     {/* Animated Subtitle */}
                     <div
                         ref={subtitleRef}
-                        className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-cyan-300 mb-8 h-12 sm:h-16 flex items-center justify-center min-h-[3rem]"
+                        className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-cyan-300 mb-6 h-12 sm:h-16 flex items-center justify-center min-h-[3rem]"
                         style={{ fontFamily: "monospace" }}
                     >
                         {/* Typewriter text will be inserted here */}
@@ -188,7 +155,7 @@ const Hero: React.FC = () => {
                     {/* Description */}
                     <p
                         ref={descriptionRef}
-                        className="text-lg sm:text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed"
+                        className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed text-center"
                     >
                         {profile.basics.summary}
                     </p>
@@ -196,17 +163,8 @@ const Hero: React.FC = () => {
                     {/* CTA Buttons */}
                     <div
                         ref={ctaRef}
-                        className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
+                        className="flex justify-center items-center"
                     >
-                        <button
-                            onClick={handleDownloadCV}
-                            className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
-                        >
-                            <Download size={20} />
-                            Download CV
-                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
-                        </button>
-
                         <button
                             onClick={handleViewProjects}
                             className="group relative px-8 py-4 border-2 border-cyan-400 text-cyan-400 font-semibold rounded-full hover:bg-cyan-400 hover:text-slate-900 transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
@@ -214,20 +172,6 @@ const Hero: React.FC = () => {
                             <Play size={20} />
                             View Projects
                         </button>
-                    </div>
-                </div>
-
-                {/* Scroll Indicator */}
-                <div
-                    ref={scrollIndicatorRef}
-                    onClick={handleScrollDown}
-                    className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer group"
-                >
-                    <div className="flex flex-col items-center text-white/70 hover:text-white transition-colors duration-300">
-                        <span className="text-sm mb-2 group-hover:text-cyan-400">
-                            Scroll Down
-                        </span>
-                        <ChevronDown size={24} className="animate-bounce" />
                     </div>
                 </div>
             </div>
