@@ -1,36 +1,173 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Modern Animated Portfolio - Rashid Khan
 
-## Getting Started
+A stunning, modern portfolio website built with Next.js 15, TypeScript, Tailwind CSS, and GSAP animations. Features smooth animations, dark mode support, responsive design, and a clean, professional layout.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Modern Design**: Clean, professional UI with glassmorphism effects
+- **Smooth Animations**: GSAP-powered animations with scroll triggers
+- **Dark Mode**: Seamless theme switching with system preference detection
+- **Responsive**: Fully responsive design for all device sizes
+- **Performance**: Optimized with Next.js 15 and Turbopack
+- **TypeScript**: Full type safety throughout the application
+- **Accessibility**: WCAG compliant with proper ARIA labels
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Animations**: GSAP (GreenSock Animation Platform)
+- **Motion**: Framer Motion for additional micro-interactions
+- **Icons**: Lucide React
+- **Fonts**: Inter & JetBrains Mono
+
+## 📦 Installation
+
+1. **Clone the repository**:
+
+    ```bash
+    git clone https://github.com/Khanr7433/portfolio.git
+    cd portfolio
+    ```
+
+2. **Install dependencies**:
+
+    ```bash
+    npm install
+    ```
+
+3. **Run the development server**:
+
+    ```bash
+    npm run dev
+    ```
+
+4. **Open your browser**:
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 🏗️ Project Structure
+
+```
+src/
+├── app/
+│   ├── globals.css          # Global styles with custom animations
+│   ├── layout.tsx           # Root layout with metadata
+│   └── page.tsx             # Main home page
+├── components/
+│   ├── Header.tsx           # Navigation header with animations
+│   └── Footer.tsx           # Footer with contact info
+├── sections/
+│   ├── Hero.tsx             # Hero section with typewriter effect
+│   ├── About.tsx            # About section with stats
+│   ├── Skills.tsx           # Animated skills showcase
+│   ├── Projects.tsx         # Project portfolio with filters
+│   └── Experience.tsx       # Timeline-based experience
+├── constants/
+│   ├── profile.ts           # Personal information
+│   ├── skills.ts            # Technical skills data
+│   ├── projects.ts          # Project portfolio data
+│   └── experience.ts        # Work experience data
+└── utils/
+    └── animations.ts        # GSAP animation utilities
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎨 Animations & Effects
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### GSAP Animations
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Scroll-triggered animations** for section reveals
+- **Typewriter effect** for dynamic text
+- **Stagger animations** for list items
+- **Parallax scrolling** for background elements
+- **Magnetic hover effects** for interactive elements
 
-## Learn More
+### CSS Animations
 
-To learn more about Next.js, take a look at the following resources:
+- **Gradient animations** for backgrounds
+- **Floating animations** for decorative elements
+- **Smooth transitions** for theme switching
+- **Glassmorphism effects** for modern UI elements
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Customization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Personal Information
 
-## Deploy on Vercel
+Update your details in the constants files:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `src/constants/profile.ts` - Personal info, contact details, social links
+- `src/constants/skills.ts` - Technical skills and proficiency levels
+- `src/constants/projects.ts` - Portfolio projects with details
+- `src/constants/experience.ts` - Work history and achievements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Styling
+
+- **Colors**: Modify the color scheme in `tailwind.config.js`
+- **Fonts**: Change fonts in `src/app/layout.tsx`
+- **Animations**: Customize animations in `src/utils/animations.ts`
+
+### Content Sections
+
+Each section is modular and can be easily modified:
+
+- Add/remove sections in `src/app/page.tsx`
+- Customize section content in respective component files
+- Adjust animations and styling per section
+
+## 📱 Responsive Design
+
+The portfolio is fully responsive with breakpoints:
+
+- **Mobile**: 320px - 768px
+- **Tablet**: 768px - 1024px
+- **Desktop**: 1024px+
+
+## 🌙 Dark Mode
+
+Automatic dark mode support with:
+
+- System preference detection
+- Manual toggle in header
+- Smooth transitions between themes
+- Dark mode optimized colors and gradients
+
+## ⚡ Performance
+
+- **Next.js 15** with Turbopack for fast builds
+- **Image optimization** with Next.js Image component
+- **Font optimization** with next/font
+- **Code splitting** for optimal loading
+- **Prefetching** for smooth navigation
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Deploy with one click
+
+### Other Platforms
+
+```bash
+npm run build
+npm start
+```
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/Khanr7433/portfolio/issues).
+
+## 📧 Contact
+
+- **Email**: khan.rashid.7433@gmail.com
+- **LinkedIn**: [Rashid Khan](https://www.linkedin.com/in/rashid-khan-820628266)
+- **GitHub**: [Khanr7433](https://github.com/Khanr7433)
+
+---
+
+Made with ❤️ by [Rashid Khan](https://github.com/Khanr7433)
