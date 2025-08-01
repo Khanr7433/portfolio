@@ -45,6 +45,7 @@ export const skills = {
                     "Nodemailer",
                     "Multer",
                     "Cloudinary",
+                    "EmailJS",
                 ],
             },
         ],
