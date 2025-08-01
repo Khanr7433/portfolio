@@ -8,7 +8,7 @@ export const education = [
         location: "Camp, Pune, Maharashtra, India",
         startYear: "2022",
         endYear: "2025",
-        cgpa: "9.11",
+        cgpa: "9.114",
         percentage: "85.9",
         grade: "A+",
         relevantCourses: [

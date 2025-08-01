@@ -22,7 +22,6 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
     isLast,
 }) => {
     const cardRef = useRef<HTMLDivElement>(null);
-    const lineRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const cardElement = cardRef.current;
@@ -45,38 +44,13 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
                 }
             );
         }
-
-        if (lineRef.current && !isLast) {
-            gsap.fromTo(
-                lineRef.current,
-                { scaleY: 0 },
-                {
-                    scaleY: 1,
-                    duration: 0.8,
-                    delay: index * 0.2 + 0.4,
-                    ease: "power2.out",
-                    transformOrigin: "top",
-                    scrollTrigger: {
-                        trigger: cardElement,
-                        start: "top 80%",
-                        toggleActions: "play none none reverse",
-                    },
-                }
-            );
-        }
     }, [index, isLast]);
 
     return (
         <div className="relative flex items-center justify-center">
-            {/* Timeline dot and line */}
+            {/* Timeline dot */}
             <div className="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
                 <div className="w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full border-4 border-white dark:border-gray-900 shadow-lg z-10"></div>
-                {!isLast && (
-                    <div
-                        ref={lineRef}
-                        className="w-0.5 h-24 bg-gradient-to-b from-blue-500 to-purple-600 mt-2"
-                    ></div>
-                )}
             </div>
 
             {/* Content */}
@@ -121,6 +95,7 @@ export const Experience: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
+    const timelineRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (titleRef.current && subtitleRef.current) {
@@ -156,6 +131,30 @@ export const Experience: React.FC = () => {
                     },
                 }
             );
+        }
+
+        // Continuous timeline line animation
+        if (timelineRef.current) {
+            gsap.set(timelineRef.current, {
+                scaleY: 0,
+                transformOrigin: "top",
+            });
+
+            gsap.to(timelineRef.current, {
+                scaleY: 1,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#timeline-container",
+                    start: "top 75%",
+                    end: "bottom 25%",
+                    scrub: 1,
+                    onUpdate: (self) => {
+                        gsap.set(timelineRef.current, {
+                            scaleY: self.progress,
+                        });
+                    },
+                },
+            });
         }
     }, []);
 
@@ -193,8 +192,20 @@ export const Experience: React.FC = () => {
                 </div>
 
                 {/* Timeline */}
-                <div className="max-w-4xl mx-auto">
-                    <div className="space-y-12">
+                <div className="max-w-4xl mx-auto relative">
+                    <div
+                        className="space-y-12 relative z-10"
+                        id="timeline-container"
+                    >
+                        {/* Continuous Timeline Line */}
+                        <div className="absolute left-1/2 transform -translate-x-1/2 top-2 -bottom-2">
+                            <div
+                                ref={timelineRef}
+                                className="w-0.5 h-full bg-gradient-to-b from-blue-500 to-purple-600"
+                                style={{ transformOrigin: "top" }}
+                            ></div>
+                        </div>
+
                         {experience.map(
                             (exp: (typeof experience)[0], index: number) => (
                                 <ExperienceCard
