@@ -53,10 +53,10 @@ const About: React.FC = () => {
     }, []);
 
     const stats = [
-        { icon: User, label: "Experience", value: "2+ Years" },
-        { icon: Award, label: "Projects", value: "10+" },
-        { icon: Target, label: "Success Rate", value: "98%" },
-        { icon: Heart, label: "Client Satisfaction", value: "100%" },
+        { icon: User, label: "Years Experience", value: "1+" },
+        { icon: Award, label: "Projects Completed", value: "15+" },
+        { icon: Target, label: "Technologies", value: "30+" },
+        { icon: Heart, label: "Certifications", value: "4+" },
     ];
 
     return (

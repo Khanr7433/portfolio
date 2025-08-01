@@ -241,7 +241,7 @@ const Tools: React.FC = () => {
                 <div className="text-center mb-16">
                     <h2
                         ref={titleRef}
-                        className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-4"
+                        className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-6"
                     >
                         Tools & Technologies
                     </h2>
@@ -271,39 +271,39 @@ const Tools: React.FC = () => {
                 {/* Additional Stats */}
                 <div className="mt-16 text-center">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
-                        <div className="p-4">
-                            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
+                        <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 hover:shadow-xl dark:hover:shadow-gray-900/40 transition-all duration-300 group">
+                            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2 group-hover:text-blue-500 dark:group-hover:text-blue-300 transition-colors duration-300">
                                 {tools.development.ide.length +
                                     tools.development.buildTools.length}
                                 +
                             </div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                            <div className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
                                 Dev Tools
                             </div>
                         </div>
-                        <div className="p-4">
-                            <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
+                        <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 hover:shadow-xl dark:hover:shadow-gray-900/40 transition-all duration-300 group">
+                            <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2 group-hover:text-purple-500 dark:group-hover:text-purple-300 transition-colors duration-300">
                                 {tools.design.ui.length}+
                             </div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                            <div className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
                                 Design Tools
                             </div>
                         </div>
-                        <div className="p-4">
-                            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
+                        <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 hover:shadow-xl dark:hover:shadow-gray-900/40 transition-all duration-300 group">
+                            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2 group-hover:text-green-500 dark:group-hover:text-green-300 transition-colors duration-300">
                                 {tools.deployment.platforms.length}+
                             </div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                            <div className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
                                 Platforms
                             </div>
                         </div>
-                        <div className="p-4">
-                            <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">
+                        <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 hover:shadow-xl dark:hover:shadow-gray-900/40 transition-all duration-300 group">
+                            <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2 group-hover:text-orange-500 dark:group-hover:text-orange-300 transition-colors duration-300">
                                 {tools.productivity.office.length +
                                     tools.productivity.browsers.length}
                                 +
                             </div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                            <div className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
                                 Productivity
                             </div>
                         </div>

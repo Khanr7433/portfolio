@@ -11,13 +11,120 @@ import {
     Server,
     Zap,
     LucideIcon,
-    Star,
+    Layers,
+    Cpu,
+    Monitor,
+    Terminal,
+    Workflow,
+    Settings,
+    Box,
+    FileCode,
+    Braces,
+    Palette,
 } from "lucide-react";
 import { skills } from "@/constants/skills";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
 }
+
+// Function to get technology icon based on skill name
+const getTechIcon = (skillName: string): LucideIcon => {
+    const skill = skillName.toLowerCase();
+    if (
+        skill.includes("react") ||
+        skill.includes("javascript") ||
+        skill.includes("typescript") ||
+        skill.includes("js") ||
+        skill.includes("tsx")
+    ) {
+        return Braces;
+    } else if (
+        skill.includes("python") ||
+        skill.includes("django") ||
+        skill.includes("flask")
+    ) {
+        return Terminal;
+    } else if (
+        skill.includes("database") ||
+        skill.includes("sql") ||
+        skill.includes("mongo") ||
+        skill.includes("mysql") ||
+        skill.includes("postgres")
+    ) {
+        return Database;
+    } else if (
+        skill.includes("mobile") ||
+        skill.includes("android") ||
+        skill.includes("ios") ||
+        skill.includes("flutter") ||
+        skill.includes("react native")
+    ) {
+        return Smartphone;
+    } else if (
+        skill.includes("server") ||
+        skill.includes("node") ||
+        skill.includes("express") ||
+        skill.includes("api") ||
+        skill.includes("backend")
+    ) {
+        return Server;
+    } else if (
+        skill.includes("css") ||
+        skill.includes("html") ||
+        skill.includes("design") ||
+        skill.includes("ui") ||
+        skill.includes("tailwind")
+    ) {
+        return Palette;
+    } else if (
+        skill.includes("git") ||
+        skill.includes("docker") ||
+        skill.includes("devops") ||
+        skill.includes("aws") ||
+        skill.includes("cloud")
+    ) {
+        return Settings;
+    } else if (
+        skill.includes("real-time") ||
+        skill.includes("socket") ||
+        skill.includes("websocket")
+    ) {
+        return Zap;
+    } else if (
+        skill.includes("framework") ||
+        skill.includes("library") ||
+        skill.includes("vue") ||
+        skill.includes("angular")
+    ) {
+        return Layers;
+    } else if (
+        skill.includes("testing") ||
+        skill.includes("jest") ||
+        skill.includes("cypress")
+    ) {
+        return FileCode;
+    } else if (
+        skill.includes("system") ||
+        skill.includes("os") ||
+        skill.includes("linux") ||
+        skill.includes("windows")
+    ) {
+        return Monitor;
+    } else if (
+        skill.includes("workflow") ||
+        skill.includes("ci") ||
+        skill.includes("cd")
+    ) {
+        return Workflow;
+    } else if (skill.includes("container") || skill.includes("kubernetes")) {
+        return Box;
+    } else if (skill.includes("processor") || skill.includes("performance")) {
+        return Cpu;
+    } else {
+        return Code;
+    }
+};
 
 interface SkillCategoryProps {
     title: string;
@@ -125,50 +232,26 @@ const SkillCategory: React.FC<SkillCategoryProps> = ({
 
             {/* Skills Grid */}
             <div className="grid grid-cols-2 gap-3 relative z-10">
-                {skills.map((skill, skillIndex) => (
-                    <div
-                        key={skillIndex}
-                        className="group/skill flex items-center p-3 bg-gray-50/50 dark:bg-gray-700/30 rounded-lg hover:bg-white dark:hover:bg-gray-600/50 transition-all duration-300 border border-gray-200/50 dark:border-gray-600/30"
-                    >
-                        <div className="flex items-center space-x-2 flex-1">
-                            <div className="flex space-x-1">
-                                {[...Array(5)].map((_, starIndex) => (
-                                    <Star
-                                        key={starIndex}
-                                        className={`w-3 h-3 ${
-                                            starIndex < 4
-                                                ? `text-yellow-400 fill-yellow-400`
-                                                : "text-gray-300 dark:text-gray-600"
-                                        }`}
-                                    />
-                                ))}
+                {skills.map((skill, skillIndex) => {
+                    const TechIcon = getTechIcon(skill);
+                    return (
+                        <div
+                            key={skillIndex}
+                            className="group/skill flex items-center p-3 bg-gray-50/50 dark:bg-gray-700/30 rounded-lg hover:bg-white dark:hover:bg-gray-600/50 transition-all duration-300 border border-gray-200/50 dark:border-gray-600/30"
+                        >
+                            <div className="flex items-center space-x-3 flex-1">
+                                <div
+                                    className={`p-2 rounded-lg bg-gradient-to-br ${bgGradient} group-hover/skill:scale-110 transition-transform duration-300`}
+                                >
+                                    <TechIcon className="w-4 h-4 text-white" />
+                                </div>
+                                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover/skill:text-gray-900 dark:group-hover/skill:text-white transition-colors duration-200">
+                                    {skill}
+                                </span>
                             </div>
                         </div>
-                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover/skill:text-gray-900 dark:group-hover/skill:text-white transition-colors duration-200">
-                            {skill}
-                        </span>
-                    </div>
-                ))}
-            </div>
-
-            {/* Progress indicator */}
-            <div className="mt-6 relative z-10">
-                <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                        Proficiency
-                    </span>
-                    <span className="text-sm font-bold text-gray-800 dark:text-white">
-                        85%
-                    </span>
-                </div>
-                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
-                    <div
-                        className={`h-full bg-gradient-to-r ${bgGradient} rounded-full relative transition-all duration-1000 group-hover:animate-pulse`}
-                        style={{ width: "85%" }}
-                    >
-                        <div className="absolute inset-0 bg-white/20 rounded-full"></div>
-                    </div>
-                </div>
+                    );
+                })}
             </div>
         </div>
     );
@@ -216,99 +299,62 @@ const Skills: React.FC = () => {
         }
     }, []);
 
-    // Define skill categories with icons and colors
+    // Define skill categories with icons and colors using data from constants
     const skillCategories = [
         {
             title: "Frontend Development",
             icon: Code,
-            skills: [
-                "React",
-                "Next.js",
-                "TypeScript",
-                "Tailwind CSS",
-                "HTML5",
-                "CSS3",
-                "JavaScript",
-                "Vue.js",
-            ],
+            skills:
+                skills.technicalSkills.programming.find(
+                    (cat) => cat.category === "Frontend"
+                )?.skills || [],
             color: "blue",
             bgGradient: "from-blue-500 to-cyan-500",
         },
         {
             title: "Backend Development",
             icon: Server,
-            skills: [
-                "Node.js",
-                "Express.js",
-                "Python",
-                "Django",
-                "FastAPI",
-                "REST APIs",
-                "GraphQL",
-                "Microservices",
-            ],
+            skills:
+                skills.technicalSkills.programming.find(
+                    (cat) => cat.category === "Backend"
+                )?.skills || [],
             color: "green",
             bgGradient: "from-green-500 to-emerald-500",
         },
         {
             title: "Database & Storage",
             icon: Database,
-            skills: [
-                "MongoDB",
-                "PostgreSQL",
-                "MySQL",
-                "Redis",
-                "Firebase",
-                "Supabase",
-                "Prisma",
-                "Mongoose",
-            ],
+            skills: skills.technicalSkills.databases,
             color: "purple",
             bgGradient: "from-purple-500 to-pink-500",
         },
         {
             title: "Mobile Development",
             icon: Smartphone,
-            skills: [
-                "React Native",
-                "Flutter",
-                "Expo",
-                "iOS Development",
-                "Android Development",
-                "Progressive Web Apps",
-            ],
+            skills:
+                skills.technicalSkills.programming.find(
+                    (cat) => cat.category === "Mobile Development"
+                )?.skills || [],
             color: "orange",
             bgGradient: "from-orange-500 to-red-500",
         },
         {
-            title: "Cloud & DevOps",
-            icon: Globe,
-            skills: [
-                "AWS",
-                "Google Cloud",
-                "Docker",
-                "Kubernetes",
-                "CI/CD",
-                "Nginx",
-                "Linux",
-                "Git",
-            ],
+            title: "Real-time Technologies",
+            icon: Zap,
+            skills:
+                skills.technicalSkills.programming.find(
+                    (cat) => cat.category === "Real-time Technologies"
+                )?.skills || [],
             color: "indigo",
             bgGradient: "from-indigo-500 to-purple-500",
         },
         {
-            title: "Tools & Technologies",
-            icon: Zap,
-            skills: [
-                "VS Code",
-                "Git",
-                "Figma",
-                "Postman",
-                "Jest",
-                "Cypress",
-                "Webpack",
-                "Vite",
-            ],
+            title: "APIs & Libraries",
+            icon: Globe,
+            skills:
+                skills.technicalSkills.programming.find(
+                    (cat) => cat.category === "APIs & Libraries"
+                )?.skills || [],
             color: "pink",
             bgGradient: "from-pink-500 to-rose-500",
         },
@@ -368,19 +414,21 @@ const Skills: React.FC = () => {
                     <h3 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-8">
                         Additional Expertise & Soft Skills
                     </h3>
-                    <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-                        {skills.technicalSkills.databases?.map(
-                            (db: string, index: number) => (
+                    <div className="flex flex-wrap justify-center gap-3 max-w-6xl mx-auto">
+                        {/* Operating Systems */}
+                        {skills.technicalSkills.operatingSystems?.map(
+                            (os: string, index: number) => (
                                 <div
-                                    key={`db-${index}`}
+                                    key={`os-${index}`}
                                     className="group px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium hover:from-blue-200 hover:to-purple-200 dark:hover:from-blue-800/40 dark:hover:to-purple-800/40 hover:text-blue-700 dark:hover:text-blue-300 transition-all duration-300 transform hover:scale-105 cursor-pointer shadow-sm hover:shadow-md"
                                 >
-                                    {db}
+                                    {os}
                                 </div>
                             )
                         ) || []}
+                        {/* Soft Skills */}
                         {skills.softSkills
-                            ?.slice(0, 8)
+                            ?.slice(0, 12)
                             .map((skill: string, index: number) => (
                                 <div
                                     key={`soft-${index}`}
@@ -389,29 +437,18 @@ const Skills: React.FC = () => {
                                     {skill}
                                 </div>
                             )) || []}
+                        {/* Languages */}
+                        {skills.languages?.map(
+                            (language: string, index: number) => (
+                                <div
+                                    key={`lang-${index}`}
+                                    className="group px-4 py-2 bg-gradient-to-r from-yellow-100 to-orange-100 dark:from-yellow-900/30 dark:to-orange-900/30 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium hover:from-yellow-200 hover:to-orange-200 dark:hover:from-yellow-800/40 dark:hover:to-orange-800/40 hover:text-yellow-700 dark:hover:text-yellow-300 transition-all duration-300 transform hover:scale-105 cursor-pointer shadow-sm hover:shadow-md"
+                                >
+                                    {language}
+                                </div>
+                            )
+                        ) || []}
                     </div>
-                </div>
-
-                {/* Skills Stats */}
-                <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
-                    {[
-                        { label: "Years Experience", value: "5+" },
-                        { label: "Projects Completed", value: "50+" },
-                        { label: "Technologies", value: "30+" },
-                        { label: "Certifications", value: "10+" },
-                    ].map((stat, index) => (
-                        <div
-                            key={index}
-                            className="text-center p-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl border border-white/20 dark:border-gray-700/50 hover:bg-white dark:hover:bg-gray-800 transition-all duration-300 group"
-                        >
-                            <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 group-hover:from-purple-600 group-hover:to-pink-600 transition-all duration-300">
-                                {stat.value}
-                            </div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
-                                {stat.label}
-                            </div>
-                        </div>
-                    ))}
                 </div>
             </div>
         </section>
