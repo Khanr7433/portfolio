@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ExternalLink, Github, Calendar, Tag } from "lucide-react";
@@ -214,7 +214,17 @@ const Projects: React.FC = () => {
     const router = useRouter();
 
     // Combine all projects and shuffle them
-    const allProjects = [...projects.major, ...projects.minor];
+    const allProjects = useMemo(
+        () => [...projects.major, ...projects.minor],
+        []
+    );
+
+    // State for featured projects to avoid hydration mismatch
+    const [featuredProjects, setFeaturedProjects] = useState<
+        typeof allProjects
+    >(
+        allProjects.slice(0, 5) // Show first 5 initially to match server render
+    );
 
     // Shuffle function
     const shuffleArray = <T,>(array: T[]): T[] => {
@@ -226,12 +236,14 @@ const Projects: React.FC = () => {
         return shuffled;
     };
 
-    // Get 5 random projects on each page load
-    const featuredProjects = shuffleArray(allProjects).slice(0, 5);
-
     const handleViewAllProjects = () => {
         router.push("/all-projects");
     };
+
+    useEffect(() => {
+        // Only shuffle on client side to avoid hydration mismatch
+        setFeaturedProjects(shuffleArray(allProjects).slice(0, 5));
+    }, [allProjects]);
 
     useEffect(() => {
         if (titleRef.current && subtitleRef.current) {
