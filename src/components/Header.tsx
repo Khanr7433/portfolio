@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import { gsap } from "gsap";
 import { Menu, X, Github, Linkedin, Mail } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { profile } from "@/constants/profile";
 
 const Header: React.FC = () => {
@@ -13,6 +14,7 @@ const Header: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState("home");
+    const pathname = usePathname();
 
     const navItems = useMemo(
         () => [
@@ -39,6 +41,14 @@ const Header: React.FC = () => {
     ];
 
     useEffect(() => {
+        // Set active section based on pathname
+        if (pathname === "/all-projects") {
+            setActiveSection("projects");
+            return; // Don't set up scroll listeners for all-projects page
+        } else {
+            setActiveSection("home"); // Default to home for main page
+        }
+
         // Initial animations
         const tl = gsap.timeline();
 
@@ -142,7 +152,7 @@ const Header: React.FC = () => {
             observer.disconnect();
             clearTimeout(timer);
         };
-    }, [navItems]);
+    }, [navItems, pathname]);
 
     useEffect(() => {
         // Animate header background on scroll
@@ -180,8 +190,28 @@ const Header: React.FC = () => {
         }
     };
 
-    const handleNavClick = (href: string) => {
+    const handleNavClick = (href: string, itemName: string) => {
         setIsMenuOpen(false);
+
+        // If clicking on Projects and we're on homepage, scroll to projects section
+        // If clicking on Projects and we're on all-projects page, stay on all-projects
+        // If clicking on Projects from any other context, go to projects section on homepage
+        if (itemName === "Projects") {
+            if (pathname === "/all-projects") {
+                return; // Stay on all-projects page
+            } else {
+                // Go to projects section on homepage
+                if (pathname !== "/") {
+                    window.location.href = "/#projects";
+                    return;
+                }
+            }
+        } else if (pathname === "/all-projects" && itemName !== "Projects") {
+            // If we're on all-projects page and clicking other nav items, go to homepage first
+            window.location.href = `/${href}`;
+            return;
+        }
+
         const element = document.querySelector(href);
         if (element) {
             element.scrollIntoView({ behavior: "smooth" });
@@ -201,7 +231,7 @@ const Header: React.FC = () => {
                     <div
                         ref={logoRef}
                         className="flex items-center cursor-pointer group"
-                        onClick={() => handleNavClick("#home")}
+                        onClick={() => handleNavClick("#home", "Home")}
                     >
                         <div className="relative">
                             <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-lg md:text-xl transform group-hover:scale-110 transition-all duration-300">
@@ -228,7 +258,7 @@ const Header: React.FC = () => {
                                     href={item.href}
                                     onClick={(e) => {
                                         e.preventDefault();
-                                        handleNavClick(item.href);
+                                        handleNavClick(item.href, item.name);
                                     }}
                                     className={`relative font-medium transition-colors duration-300 group ${
                                         isActive
@@ -293,7 +323,10 @@ const Header: React.FC = () => {
                                         href={item.href}
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            handleNavClick(item.href);
+                                            handleNavClick(
+                                                item.href,
+                                                item.name
+                                            );
                                         }}
                                         className={`block text-lg font-medium transition-colors duration-300 ${
                                             isActive
