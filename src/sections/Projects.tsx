@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ExternalLink, Github, Calendar, Tag } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { projects } from "@/constants/projects";
 
 if (typeof window !== "undefined") {
@@ -11,7 +12,7 @@ if (typeof window !== "undefined") {
 }
 
 interface ProjectCardProps {
-    project: (typeof projects.major)[0];
+    project: (typeof projects.major)[0] | (typeof projects.minor)[0];
     index: number;
 }
 
@@ -113,6 +114,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                         {project.category}
                     </span>
                 </div>
+
+                {/* Project Type Badge */}
+                <div className="absolute top-4 left-4">
+                    <span
+                        className={`px-2 py-1 text-xs font-medium rounded-full ${
+                            projects.major.some((p) => p.id === project.id)
+                                ? "bg-green-500/20 text-green-100 border border-green-400/30"
+                                : "bg-blue-500/20 text-blue-100 border border-blue-400/30"
+                        }`}
+                    >
+                        {projects.major.some((p) => p.id === project.id)
+                            ? "Major"
+                            : "Minor"}
+                    </span>
+                </div>
             </div>
 
             {/* Content */}
@@ -195,16 +211,27 @@ const Projects: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
-    const [filter, setFilter] = useState<string>("all");
+    const router = useRouter();
 
-    const categories = [
-        "all",
-        ...new Set(projects.major.map((project) => project.category)),
-    ];
-    const filteredProjects =
-        filter === "all"
-            ? projects.major
-            : projects.major.filter((project) => project.category === filter);
+    // Combine all projects and shuffle them
+    const allProjects = [...projects.major, ...projects.minor];
+
+    // Shuffle function
+    const shuffleArray = <T,>(array: T[]): T[] => {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    };
+
+    // Get 5 random projects on each page load
+    const featuredProjects = shuffleArray(allProjects).slice(0, 5);
+
+    const handleViewAllProjects = () => {
+        router.push("/all-projects");
+    };
 
     useEffect(() => {
         if (titleRef.current && subtitleRef.current) {
@@ -268,34 +295,17 @@ const Projects: React.FC = () => {
                         ref={subtitleRef}
                         className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
                     >
-                        A showcase of my recent work and creative solutions
+                        A randomly curated selection from my portfolio - refresh
+                        to see different projects
                     </p>
                     <div className="mt-6 flex justify-center">
                         <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
                     </div>
                 </div>
 
-                {/* Filter Buttons */}
-                <div className="flex flex-wrap justify-center gap-3 mb-12">
-                    {categories.map((category) => (
-                        <button
-                            key={category}
-                            onClick={() => setFilter(category)}
-                            className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
-                                filter === category
-                                    ? "bg-blue-600 text-white shadow-lg shadow-blue-600/25"
-                                    : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
-                            }`}
-                        >
-                            {category.charAt(0).toUpperCase() +
-                                category.slice(1)}
-                        </button>
-                    ))}
-                </div>
-
                 {/* Projects Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredProjects.map((project, index) => (
+                    {featuredProjects.map((project, index) => (
                         <ProjectCard
                             key={project.id}
                             project={project}
@@ -304,9 +314,20 @@ const Projects: React.FC = () => {
                     ))}
                 </div>
 
+                {/* Projects count indicator */}
+                <div className="text-center mt-8 mb-4">
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">
+                        Showing {featuredProjects.length} randomly selected
+                        projects from {allProjects.length} total projects
+                    </p>
+                </div>
+
                 {/* View More Button */}
                 <div className="text-center mt-12">
-                    <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 overflow-hidden">
+                    <button
+                        onClick={handleViewAllProjects}
+                        className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 overflow-hidden"
+                    >
                         <span className="relative z-10">View All Projects</span>
                         <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                     </button>
