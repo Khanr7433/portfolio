@@ -92,19 +92,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
     return (
         <div
             ref={cardRef}
-            className="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 overflow-hidden hover:shadow-2xl dark:hover:shadow-gray-900/40 transition-all duration-500"
+            className="group relative bg-surface rounded-[24px] overflow-hidden hover:shadow-[0_0_25px_rgba(180,83,9,0.2)] transition-all duration-500 border border-accent/20 hover:border-accent/50"
         >
             {/* Project Image/Visual */}
-            <div className="relative h-48 sm:h-56 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 overflow-hidden">
+            <div className="relative h-48 sm:h-56 bg-surface overflow-hidden group-hover:bg-slate-900 transition-colors duration-500">
                 <div
                     ref={imageRef}
-                    className="absolute inset-0 bg-gradient-to-br from-blue-400/80 to-purple-600/80 flex items-center justify-center"
+                    className="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center group-hover:from-slate-800 group-hover:to-slate-900 transition-all duration-500"
                 >
-                    <div className="text-center">
-                        <div className="w-16 h-16 mx-auto mb-4 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                            <Tag className="w-8 h-8 text-white" />
+                    <div className="text-center transform transition-transform duration-500 group-hover:scale-110">
+                        <div className="w-16 h-16 mx-auto mb-4 bg-accent/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-accent/20 group-hover:border-accent/50 group-hover:shadow-[0_0_20px_rgba(180,83,9,0.3)] transition-all duration-300">
+                            <Tag className="w-8 h-8 text-accent group-hover:text-white transition-colors duration-300" />
                         </div>
-                        <h3 className="text-xl font-bold text-white px-4">
+                        <h3 className="text-xl font-bold text-gray-200 px-4 group-hover:text-white transition-colors duration-300">
                             {project.title}
                         </h3>
                     </div>
@@ -112,7 +112,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
 
                 {/* Category Badge */}
                 <div className="absolute top-4 right-4">
-                    <span className="px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-xs font-medium rounded-full">
+                    <span className="px-3 py-1 bg-black/40 backdrop-blur-md border border-white/10 text-gray-300 text-xs font-medium rounded-full hover:bg-black/60 transition-colors duration-300">
                         {project.category}
                     </span>
                 </div>
@@ -120,10 +120,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                 {/* Project Type Badge */}
                 <div className="absolute top-4 left-4">
                     <span
-                        className={`px-2 py-1 text-xs font-medium rounded-full ${
+                        className={`px-2 py-1 text-xs font-medium rounded-full backdrop-blur-md ${
                             projects.major.some((p) => p.id === project.id)
-                                ? "bg-green-500/20 text-green-100 border border-green-400/30"
-                                : "bg-blue-500/20 text-blue-100 border border-blue-400/30"
+                                ? "bg-accent/20 text-accent border border-accent/30"
+                                : "bg-slate-700/50 text-gray-300 border border-white/10"
                         }`}
                     >
                         {projects.major.some((p) => p.id === project.id)
@@ -137,23 +137,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
             <div className="p-6">
                 {/* Title and Duration */}
                 <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                    <h3 className="text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">
                         {project.title}
                     </h3>
-                    <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                    <div className="flex items-center text-sm text-gray-400">
                         <Calendar className="w-4 h-4 mr-1" />
                         <span>{formatDate(project.duration.start)}</span>
                     </div>
                 </div>
 
                 {/* Description */}
-                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
+                <p className="text-muted text-sm leading-relaxed mb-4 line-clamp-3">
                     {project.description}
                 </p>
-
+                
                 {/* Role */}
                 <div className="mb-4">
-                    <span className="inline-block px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-medium rounded-full">
+                    <span className="inline-block px-3 py-1 bg-accent/10 border border-accent/20 text-accent text-xs font-medium rounded-full">
                         {project.role}
                     </span>
                 </div>
@@ -164,7 +164,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                         {project.technologies.map((tech, techIndex) => (
                             <span
                                 key={techIndex}
-                                className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs rounded-md hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200"
+                                className="px-2 py-1 bg-background border border-white/5 text-gray-300 text-xs rounded-md hover:bg-accent/10 hover:text-accent hover:border-accent/20 transition-colors duration-200"
                             >
                                 {tech}
                             </span>
@@ -179,7 +179,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-gray-700 text-white text-sm font-medium rounded-lg hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors duration-200"
+                            className="flex items-center gap-2 px-4 py-2 bg-background border border-white/10 text-white text-sm font-medium rounded-lg hover:bg-surface hover:border-accent/30 transition-colors duration-200"
                         >
                             <Github className="w-4 h-4" />
                             Code
@@ -190,7 +190,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                             href={project.liveDemo}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                            className="flex items-center gap-2 px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-glow transition-colors duration-200 shadow-lg hover:shadow-accent/20"
                         >
                             <ExternalLink className="w-4 h-4" />
                             Live Demo
@@ -206,6 +206,8 @@ const AllProjectsPage: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
+    const blob1Ref = useRef<HTMLDivElement>(null);
+    const blob2Ref = useRef<HTMLDivElement>(null);
     const [filter, setFilter] = useState<string>("all");
     const router = useRouter();
 
@@ -249,6 +251,28 @@ const AllProjectsPage: React.FC = () => {
     })();
 
     useEffect(() => {
+        // Blob animations
+        if (blob1Ref.current && blob2Ref.current) {
+            gsap.to(blob1Ref.current, {
+                scale: 1.2,
+                opacity: 0.15,
+                duration: 4,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut",
+            });
+
+            gsap.to(blob2Ref.current, {
+                scale: 1.2,
+                opacity: 0.15,
+                duration: 5,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut",
+                delay: 1,
+            });
+        }
+
         if (titleRef.current && subtitleRef.current) {
             gsap.fromTo(
                 titleRef.current,
@@ -280,19 +304,18 @@ const AllProjectsPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-900">
+        <div className="min-h-screen bg-background">
             <Header />
 
             <main className="pt-20">
                 <section
                     ref={sectionRef}
-                    className="py-20 bg-gray-900 relative overflow-hidden"
+                    className="py-20 bg-background relative overflow-hidden"
                 >
                     {/* Background decoration */}
-                    <div className="absolute inset-0 overflow-hidden">
-                        <div className="absolute top-1/4 -left-20 w-40 h-40 bg-blue-400/10 rounded-full blur-3xl"></div>
-                        <div className="absolute bottom-1/4 -right-20 w-40 h-40 bg-purple-400/10 rounded-full blur-3xl"></div>
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-400/5 to-purple-400/5 rounded-full blur-3xl"></div>
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                        <div ref={blob1Ref} className="absolute top-40 left-0 w-80 h-80 bg-blue-900/10 rounded-full blur-3xl"></div>
+                        <div ref={blob2Ref} className="absolute top-40 right-0 w-80 h-80 bg-accent-glow/10 rounded-full blur-3xl"></div>
                     </div>
 
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -300,7 +323,7 @@ const AllProjectsPage: React.FC = () => {
                         <div className="mb-8">
                             <button
                                 onClick={handleBackToHome}
-                                className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors duration-200"
+                                className="flex items-center gap-2 px-4 py-2 bg-surface hover:bg-white/5 text-gray-300 hover:text-white rounded-lg transition-colors duration-200 border border-white/5 hover:border-accent/30"
                             >
                                 <ArrowLeft className="w-4 h-4" />
                                 Back to Home
@@ -311,19 +334,19 @@ const AllProjectsPage: React.FC = () => {
                         <div className="text-center mb-16">
                             <h1
                                 ref={titleRef}
-                                className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-4"
+                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
                             >
                                 All Projects
                             </h1>
                             <p
                                 ref={subtitleRef}
-                                className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+                                className="text-lg text-muted max-w-2xl mx-auto"
                             >
                                 A comprehensive showcase of all my projects -
                                 both major and minor works
                             </p>
                             <div className="mt-6 flex justify-center">
-                                <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                                <div className="w-24 h-1 bg-gradient-to-r from-blue-900 to-accent rounded-full"></div>
                             </div>
                         </div>
 
@@ -345,14 +368,14 @@ const AllProjectsPage: React.FC = () => {
                                     <button
                                         key={category}
                                         onClick={() => setFilter(category)}
-                                        className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+                                        className={`px-6 py-2 rounded-full font-medium transition-all duration-300 border ${
                                             filter === category
                                                 ? isProjectType
                                                     ? category === "major"
-                                                        ? "bg-green-600 text-white shadow-lg shadow-green-600/25"
-                                                        : "bg-purple-600 text-white shadow-lg shadow-purple-600/25"
-                                                    : "bg-blue-600 text-white shadow-lg shadow-blue-600/25"
-                                                : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
+                                                        ? "bg-accent text-white border-accent shadow-[0_0_15px_rgba(180,83,9,0.3)]"
+                                                        : "bg-surface text-gray-300 border-white/10 hover:border-accent/30"
+                                                    : "bg-accent text-white border-accent shadow-[0_0_15px_rgba(180,83,9,0.3)]"
+                                                : "bg-surface text-gray-400 border-white/5 hover:border-accent/30 hover:text-white"
                                         }`}
                                     >
                                         {buttonText}
@@ -360,7 +383,7 @@ const AllProjectsPage: React.FC = () => {
                                 );
                             })}
                         </div>
-
+                        
                         {/* Projects Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                             {filteredProjects.map((project, index) => (
@@ -374,7 +397,7 @@ const AllProjectsPage: React.FC = () => {
 
                         {/* Projects Count */}
                         <div className="text-center mt-12">
-                            <p className="text-gray-600 dark:text-gray-400">
+                            <p className="text-muted">
                                 Showing {filteredProjects.length} of{" "}
                                 {allProjects.length} projects
                                 {filter === "major" && " (Major Projects Only)"}
@@ -384,13 +407,13 @@ const AllProjectsPage: React.FC = () => {
                                     filter !== "minor" &&
                                     ` in "${filter}" category`}
                             </p>
-                            <div className="flex justify-center items-center gap-6 mt-3 text-sm text-gray-500 dark:text-gray-500">
+                            <div className="flex justify-center items-center gap-6 mt-3 text-sm text-gray-500">
                                 <span className="flex items-center gap-2">
-                                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                                    <div className="w-3 h-3 bg-accent rounded-full"></div>
                                     {projects.major.length} Major Projects
                                 </span>
                                 <span className="flex items-center gap-2">
-                                    <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                                    <div className="w-3 h-3 bg-slate-700 rounded-full"></div>
                                     {projects.minor.length} Minor Projects
                                 </span>
                             </div>

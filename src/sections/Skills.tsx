@@ -197,34 +197,20 @@ const SkillCategory: React.FC<SkillCategoryProps> = ({
     return (
         <div
             ref={cardRef}
-            className="group relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-lg dark:shadow-gray-900/20 p-6 hover:shadow-2xl dark:hover:shadow-gray-900/50 transition-all duration-500 border border-white/20 dark:border-gray-700/50 overflow-hidden"
+            className="group relative bg-surface rounded-[24px] overflow-hidden hover:shadow-[0_0_20px_rgba(180,83,9,0.15)] transition-all duration-500 border border-white/5 hover:border-accent/40 p-6"
         >
-            {/* Background gradient overlay */}
-            <div
-                className={`absolute inset-0 bg-gradient-to-br ${bgGradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
-            ></div>
-
-            {/* Animated border */}
-            <div
-                className={`absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-br ${bgGradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500`}
-                style={{
-                    mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                    maskComposite: "exclude",
-                }}
-            ></div>
-
             {/* Header */}
             <div className="flex items-center mb-6 relative z-10">
                 <div
-                    className={`p-3 rounded-xl bg-gradient-to-br ${bgGradient} mr-4 group-hover:scale-110 transition-transform duration-300`}
+                    className="p-3 rounded-xl bg-accent/10 mr-4 group-hover:bg-accent/20 transition-colors duration-300"
                 >
-                    <Icon className="w-6 h-6 text-white" />
+                    <Icon className="w-6 h-6 text-accent group-hover:text-white transition-colors duration-300" />
                 </div>
                 <div>
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300">
+                    <h3 className="text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">
                         {title}
                     </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-muted">
                         {skills.length} technologies
                     </p>
                 </div>
@@ -237,15 +223,15 @@ const SkillCategory: React.FC<SkillCategoryProps> = ({
                     return (
                         <div
                             key={skillIndex}
-                            className="group/skill flex items-center p-3 bg-gray-50/50 dark:bg-gray-700/30 rounded-lg hover:bg-white dark:hover:bg-gray-600/50 transition-all duration-300 border border-gray-200/50 dark:border-gray-600/30"
+                            className="group/skill flex items-center p-3 bg-background/50 rounded-lg hover:bg-white/5 transition-all duration-300 border border-white/5"
                         >
                             <div className="flex items-center space-x-3 flex-1">
                                 <div
-                                    className={`p-2 rounded-lg bg-gradient-to-br ${bgGradient} group-hover/skill:scale-110 transition-transform duration-300`}
+                                    className="p-2 rounded-lg bg-gray-800 group-hover/skill:scale-110 transition-transform duration-300"
                                 >
-                                    <TechIcon className="w-4 h-4 text-white" />
+                                    <TechIcon className="w-4 h-4 text-gray-400 group-hover/skill:text-accent transition-colors duration-300" />
                                 </div>
-                                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover/skill:text-gray-900 dark:group-hover/skill:text-white transition-colors duration-200">
+                                <span className="text-sm font-medium text-gray-400 group-hover/skill:text-white transition-colors duration-200">
                                     {skill}
                                 </span>
                             </div>
@@ -364,13 +350,12 @@ const Skills: React.FC = () => {
         <section
             id="skills"
             ref={sectionRef}
-            className="py-20 bg-gradient-to-br from-gray-900 to-slate-900 relative overflow-hidden"
+            className="py-20 bg-background relative overflow-hidden"
         >
             {/* Background decoration */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-400/5 to-purple-400/5 rounded-full blur-3xl"></div>
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-900/10 rounded-full blur-3xl"></div>
+                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent-glow/10 rounded-full blur-3xl"></div>
             </div>
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -378,20 +363,17 @@ const Skills: React.FC = () => {
                 <div className="text-center mb-16">
                     <h2
                         ref={titleRef}
-                        className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-4"
+                        className="text-4xl md:text-5xl font-bold text-white mb-4"
                     >
                         Technical Skills
                     </h2>
                     <p
                         ref={subtitleRef}
-                        className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+                        className="text-lg text-muted max-w-2xl mx-auto"
                     >
                         Comprehensive expertise across modern web technologies
                         and development tools
                     </p>
-                    <div className="mt-6 flex justify-center">
-                        <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
-                    </div>
                 </div>
 
                 {/* Skills Categories Grid */}
@@ -411,7 +393,7 @@ const Skills: React.FC = () => {
 
                 {/* Additional Skills & Soft Skills */}
                 <div className="mt-16">
-                    <h3 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-8">
+                    <h3 className="text-2xl font-bold text-center text-white mb-8">
                         Additional Expertise & Soft Skills
                     </h3>
                     <div className="flex flex-wrap justify-center gap-3 max-w-6xl mx-auto">
@@ -420,7 +402,7 @@ const Skills: React.FC = () => {
                             (os: string, index: number) => (
                                 <div
                                     key={`os-${index}`}
-                                    className="group px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium hover:from-blue-200 hover:to-purple-200 dark:hover:from-blue-800/40 dark:hover:to-purple-800/40 hover:text-blue-700 dark:hover:text-blue-300 transition-all duration-300 transform hover:scale-105 cursor-pointer shadow-sm hover:shadow-md"
+                                    className="group px-4 py-2 bg-surface border border-accent/20 text-gray-300 rounded-full text-sm font-medium hover:border-accent/60 hover:text-white transition-all duration-300 transform hover:scale-105 cursor-pointer"
                                 >
                                     {os}
                                 </div>
@@ -432,7 +414,7 @@ const Skills: React.FC = () => {
                             .map((skill: string, index: number) => (
                                 <div
                                     key={`soft-${index}`}
-                                    className="group px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium hover:from-green-200 hover:to-emerald-200 dark:hover:from-green-800/40 dark:hover:to-emerald-800/40 hover:text-green-700 dark:hover:text-green-300 transition-all duration-300 transform hover:scale-105 cursor-pointer shadow-sm hover:shadow-md"
+                                    className="group px-4 py-2 bg-surface border border-accent/20 text-gray-300 rounded-full text-sm font-medium hover:border-accent/60 hover:text-white transition-all duration-300 transform hover:scale-105 cursor-pointer"
                                 >
                                     {skill}
                                 </div>
@@ -442,7 +424,7 @@ const Skills: React.FC = () => {
                             (language: string, index: number) => (
                                 <div
                                     key={`lang-${index}`}
-                                    className="group px-4 py-2 bg-gradient-to-r from-yellow-100 to-orange-100 dark:from-yellow-900/30 dark:to-orange-900/30 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium hover:from-yellow-200 hover:to-orange-200 dark:hover:from-yellow-800/40 dark:hover:to-orange-800/40 hover:text-yellow-700 dark:hover:text-yellow-300 transition-all duration-300 transform hover:scale-105 cursor-pointer shadow-sm hover:shadow-md"
+                                    className="group px-4 py-2 bg-surface border border-accent/20 text-gray-300 rounded-full text-sm font-medium hover:border-accent/60 hover:text-white transition-all duration-300 transform hover:scale-105 cursor-pointer"
                                 >
                                     {language}
                                 </div>

@@ -117,16 +117,13 @@ const Hero: React.FC = () => {
         <section
             id="home"
             ref={heroRef}
-            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
+            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
         >
-            {/* Background Elements */}
-            <div ref={backgroundRef} className="absolute inset-0 opacity-20">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
-
-                {/* Animated gradient orbs */}
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
+            {/* Background Gradients */}
+            <div ref={backgroundRef} className="absolute inset-0 z-0">
+                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-900/20 rounded-full blur-[120px]"></div>
+                <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-accent-glow/20 rounded-full blur-[120px]"></div>
+                <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 mix-blend-overlay"></div>
             </div>
 
             {/* Content */}
@@ -135,19 +132,18 @@ const Hero: React.FC = () => {
                     {/* Main Title */}
                     <h1
                         ref={titleRef}
-                        className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-4 leading-tight"
+                        className="text-6xl sm:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight leading-none"
                     >
-                        <div className="mb-1">Hello, I&apos;m</div>
-                        <div className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        <div className="mb-2 text-muted text-2xl sm:text-3xl font-medium tracking-normal">Hello, I&apos;m</div>
+                        <span className="bg-gradient-to-r from-white via-white to-accent bg-clip-text text-transparent">
                             {profile.basics.name}
-                        </div>
+                        </span>
                     </h1>
 
                     {/* Animated Subtitle */}
                     <div
                         ref={subtitleRef}
-                        className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-cyan-300 mb-6 h-12 sm:h-16 flex items-center justify-center min-h-[3rem]"
-                        style={{ fontFamily: "monospace" }}
+                        className="text-2xl sm:text-3xl font-medium text-muted mb-8 h-12 flex items-center justify-center"
                     >
                         {/* Typewriter text will be inserted here */}
                     </div>
@@ -155,7 +151,7 @@ const Hero: React.FC = () => {
                     {/* Description */}
                     <p
                         ref={descriptionRef}
-                        className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed text-center"
+                        className="text-lg sm:text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed text-center"
                     >
                         {profile.basics.summary}
                     </p>
@@ -163,24 +159,18 @@ const Hero: React.FC = () => {
                     {/* CTA Buttons */}
                     <div
                         ref={ctaRef}
-                        className="flex justify-center items-center"
+                        className="flex justify-center items-center gap-4"
                     >
                         <button
                             onClick={handleViewProjects}
-                            className="group relative px-8 py-4 border-2 border-cyan-400 text-cyan-400 font-semibold rounded-full hover:bg-cyan-400 hover:text-slate-900 transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                            className="px-8 py-4 bg-accent text-white font-semibold rounded-full hover:bg-accent-glow hover:scale-105 transition-all duration-300 flex items-center gap-2 shadow-[0_0_20px_rgba(180,83,9,0.4)]"
                         >
-                            <Play size={20} />
+                            <Play size={20} fill="currentColor" />
                             View Projects
                         </button>
                     </div>
                 </div>
             </div>
-
-            {/* Decorative Elements */}
-            <div className="absolute top-20 left-10 w-2 h-2 bg-cyan-400 rounded-full animate-ping delay-1000"></div>
-            <div className="absolute top-40 right-20 w-3 h-3 bg-purple-400 rounded-full animate-ping delay-2000"></div>
-            <div className="absolute bottom-40 left-20 w-2 h-2 bg-pink-400 rounded-full animate-ping delay-3000"></div>
-            <div className="absolute bottom-20 right-10 w-3 h-3 bg-cyan-400 rounded-full animate-ping"></div>
         </section>
     );
 };

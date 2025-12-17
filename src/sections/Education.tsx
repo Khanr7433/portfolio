@@ -48,12 +48,12 @@ const EducationCard: React.FC<EducationCardProps> = ({
 
     const getGradeColor = (grade: string) => {
         if (grade === "A+" || parseFloat(grade) >= 9.0)
-            return "from-green-500 to-emerald-500";
+            return "from-accent to-amber-500"; // Bronze/Gold for top grades
         if (grade === "A" || parseFloat(grade) >= 8.0)
-            return "from-blue-500 to-cyan-500";
+            return "from-blue-600 to-indigo-600"; // Deep Midnight Blue for good grades
         if (grade === "B" || parseFloat(grade) >= 7.0)
-            return "from-orange-500 to-yellow-500";
-        return "from-gray-500 to-gray-600";
+            return "from-slate-500 to-gray-500"; // Silver/Gray for average
+        return "from-gray-600 to-gray-700";
     };
 
     const formatYear = (year: string) => {
@@ -64,7 +64,7 @@ const EducationCard: React.FC<EducationCardProps> = ({
         <div className="relative flex items-center justify-center">
             {/* Timeline dot */}
             <div className="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
-                <div className="w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full border-4 border-white dark:border-gray-900 shadow-lg z-10 flex items-center justify-center">
+                <div className="w-4 h-4 bg-accent/80 rounded-full border-4 border-background shadow-lg z-10 flex items-center justify-center">
                     <GraduationCap className="w-2 h-2 text-white" />
                 </div>
             </div>
@@ -76,10 +76,10 @@ const EducationCard: React.FC<EducationCardProps> = ({
                     index % 2 === 0 ? "mr-auto pr-8" : "ml-auto pl-8"
                 }`}
             >
-                <div className="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 p-6 hover:shadow-xl dark:hover:shadow-gray-900/40 transition-all duration-300 border border-gray-100 dark:border-gray-700">
+                <div className="group relative bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300 p-6 hover:shadow-[0_0_20px_rgba(180,83,9,0.15)]">
                     {/* Duration badge */}
                     <div className="absolute -top-3 left-6">
-                        <span className="px-3 py-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-medium rounded-full shadow-lg">
+                        <span className="px-3 py-1 bg-accent/20 border border-accent/40 text-accent-glow text-xs font-bold rounded-full shadow-lg backdrop-blur-sm group-hover:bg-accent group-hover:text-white transition-all duration-300">
                             {formatYear(edu.startYear)} -{" "}
                             {formatYear(edu.endYear)}
                         </span>
@@ -87,13 +87,13 @@ const EducationCard: React.FC<EducationCardProps> = ({
 
                     {/* Institution and degree */}
                     <div className="mt-4 mb-4">
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 mb-2">
+                        <h3 className="text-xl font-bold text-white group-hover:text-accent transition-colors duration-300 mb-2">
                             {edu.degree}
                         </h3>
-                        <h4 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">
+                        <h4 className="text-lg font-semibold text-accent mb-2">
                             {edu.institution}
                         </h4>
-                        <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-2">
+                        <div className="flex items-center gap-4 text-sm text-muted mb-2">
                             <div className="flex items-center gap-1">
                                 <MapPin className="w-4 h-4" />
                                 <span>{edu.location}</span>
@@ -110,8 +110,8 @@ const EducationCard: React.FC<EducationCardProps> = ({
                         <div className="flex items-center gap-4">
                             {edu.cgpa && (
                                 <div className="flex items-center gap-2">
-                                    <Award className="w-4 h-4 text-yellow-500" />
-                                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    <Award className="w-4 h-4 text-accent" />
+                                    <span className="text-sm font-medium text-gray-300">
                                         CGPA:{" "}
                                         <span
                                             className={`font-bold bg-gradient-to-r ${getGradeColor(edu.cgpa)} bg-clip-text text-transparent`}
@@ -123,7 +123,7 @@ const EducationCard: React.FC<EducationCardProps> = ({
                             )}
                             {edu.percentage && (
                                 <div className="flex items-center gap-2">
-                                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    <span className="text-sm font-medium text-gray-300">
                                         {edu.percentage}% ({edu.grade})
                                     </span>
                                 </div>
@@ -134,7 +134,7 @@ const EducationCard: React.FC<EducationCardProps> = ({
                     {/* Relevant Courses */}
                     {edu.relevantCourses && edu.relevantCourses.length > 0 && (
                         <div className="mb-4">
-                            <h5 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                            <h5 className="text-sm font-semibold text-gray-300 mb-3">
                                 Key Subjects:
                             </h5>
                             <div className="flex flex-wrap gap-2">
@@ -147,14 +147,14 @@ const EducationCard: React.FC<EducationCardProps> = ({
                                         ) => (
                                             <span
                                                 key={courseIndex}
-                                                className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-md font-medium"
+                                                className="px-2 py-1 bg-background border border-white/5 text-gray-400 text-xs rounded-md font-medium"
                                             >
                                                 {course}
                                             </span>
                                         )
                                     )}
                                 {edu.relevantCourses.length > 6 && (
-                                    <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-xs rounded-md">
+                                    <span className="px-2 py-1 bg-background text-gray-500 text-xs rounded-md">
                                         +{edu.relevantCourses.length - 6} more
                                     </span>
                                 )}
@@ -232,7 +232,7 @@ const Education: React.FC = () => {
                     onUpdate: (self) => {
                         gsap.set(timelineRef.current, {
                             scaleY: self.progress,
-                        });
+                            });
                     },
                 },
             });
@@ -243,13 +243,13 @@ const Education: React.FC = () => {
         <section
             id="education"
             ref={sectionRef}
-            className="py-20 bg-gradient-to-br from-gray-800 to-slate-900 relative overflow-hidden"
+            className="py-20 bg-background relative overflow-hidden"
         >
             {/* Background decoration */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-400/5 to-purple-400/5 rounded-full blur-3xl"></div>
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-900/10 rounded-full blur-3xl"></div>
+                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent-glow/10 rounded-full blur-3xl"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent-glow/5 rounded-full blur-3xl"></div>
             </div>
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -257,19 +257,16 @@ const Education: React.FC = () => {
                 <div className="text-center mb-16">
                     <h2
                         ref={titleRef}
-                        className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-4"
+                        className="text-4xl md:text-5xl font-bold text-white mb-4"
                     >
                         Education
                     </h2>
                     <p
                         ref={subtitleRef}
-                        className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+                        className="text-lg text-muted max-w-2xl mx-auto"
                     >
                         My academic journey and educational achievements
                     </p>
-                    <div className="mt-6 flex justify-center">
-                        <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
-                    </div>
                 </div>
 
                 {/* Timeline */}
@@ -279,10 +276,14 @@ const Education: React.FC = () => {
                         id="education-timeline-container"
                     >
                         {/* Continuous Timeline Line */}
-                        <div className="absolute left-1/2 transform -translate-x-1/2 top-2 -bottom-2">
+                        <div className="absolute left-1/2 transform -translate-x-1/2 top-2 -bottom-2 h-full w-0.5">
+                            {/* Static Background Track */}
+                            <div className="absolute inset-0 w-full h-full bg-white/5 rounded-full"></div>
+
+                            {/* Animated Progress Line */}
                             <div
                                 ref={timelineRef}
-                                className="w-0.5 h-full bg-gradient-to-b from-blue-500 to-purple-600"
+                                className="absolute top-0 left-0 w-full h-full bg-accent shadow-[0_0_15px_rgba(180,83,9,0.6)] rounded-full"
                                 style={{ transformOrigin: "top" }}
                             ></div>
                         </div>
@@ -302,27 +303,27 @@ const Education: React.FC = () => {
 
                 {/* Education Stats */}
                 <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-                    <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20">
-                        <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
+                    <div className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300">
+                        <div className="text-3xl font-bold text-accent mb-2">
                             {education.length}
                         </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
+                        <div className="text-sm text-gray-400">
                             Courses Completed
                         </div>
                     </div>
-                    <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20">
-                        <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
+                    <div className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300">
+                        <div className="text-3xl font-bold text-accent mb-2">
                             9.11
                         </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
+                        <div className="text-sm text-gray-400">
                             Current CGPA
                         </div>
                     </div>
-                    <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20">
-                        <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
+                    <div className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300">
+                        <div className="text-3xl font-bold text-accent mb-2">
                             A+
                         </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
+                        <div className="text-sm text-gray-400">
                             Current Grade
                         </div>
                     </div>

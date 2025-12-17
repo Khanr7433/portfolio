@@ -128,20 +128,19 @@ const ContactForm: React.FC = () => {
                         duration: 5000,
                         position: "top-center",
                         style: {
-                            background:
-                                "linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)",
+                            background: "#0f172a", // surface
                             color: "#fff",
-                            border: "none",
-                            borderRadius: "12px",
+                            border: "1px solid rgba(180, 83, 9, 0.3)", // accent/30
+                            borderRadius: "16px",
                             padding: "16px 20px",
                             fontSize: "14px",
                             fontWeight: "500",
                             boxShadow:
-                                "0 10px 25px -5px rgba(59, 130, 246, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                                "0 10px 25px -5px rgba(180, 83, 9, 0.2)",
                         },
                         iconTheme: {
-                            primary: "#fff",
-                            secondary: "transparent",
+                            primary: "#b45309", // accent
+                            secondary: "#fff",
                         },
                     }
                 );
@@ -156,20 +155,19 @@ const ContactForm: React.FC = () => {
                     duration: 6000,
                     position: "top-center",
                     style: {
-                        background:
-                            "linear-gradient(135deg, #EF4444 0%, #DC2626 100%)",
+                        background: "#0f172a", // surface
                         color: "#fff",
-                        border: "none",
-                        borderRadius: "12px",
+                        border: "1px solid rgba(220, 38, 38, 0.3)", // red-600/30
+                        borderRadius: "16px",
                         padding: "16px 20px",
                         fontSize: "14px",
                         fontWeight: "500",
                         boxShadow:
-                            "0 10px 25px -5px rgba(239, 68, 68, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                            "0 10px 25px -5px rgba(220, 38, 38, 0.2)",
                     },
                     iconTheme: {
-                        primary: "#fff",
-                        secondary: "transparent",
+                        primary: "#dc2626", // red-600
+                        secondary: "#fff",
                     },
                 }
             );
@@ -205,12 +203,12 @@ const ContactForm: React.FC = () => {
             <section
                 id="contact-form"
                 ref={sectionRef}
-                className="py-20 bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden"
+                className="py-20 bg-background relative overflow-hidden"
             >
                 {/* Background decoration */}
-                <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute top-1/4 left-10 w-40 h-40 bg-blue-400/10 rounded-full blur-3xl"></div>
-                    <div className="absolute bottom-1/4 right-10 w-40 h-40 bg-purple-400/10 rounded-full blur-3xl"></div>
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <div className="absolute top-1/4 left-10 w-40 h-40 bg-blue-900/10 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-1/4 right-10 w-40 h-40 bg-accent-glow/10 rounded-full blur-3xl"></div>
                 </div>
 
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -218,27 +216,24 @@ const ContactForm: React.FC = () => {
                     <div className="text-center mb-16">
                         <h2
                             ref={titleRef}
-                            className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-4"
+                            className="text-4xl md:text-5xl font-bold text-white mb-4"
                         >
                             Get In Touch
                         </h2>
-                        <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                        <p className="text-lg text-muted max-w-2xl mx-auto">
                             Have a project in mind? Let&apos;s discuss how we
                             can work together to bring your ideas to life.
                         </p>
-                        <div className="mt-6 flex justify-center">
-                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
-                        </div>
                     </div>
 
                     <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
                         {/* Contact Information */}
                         <div className="space-y-8">
                             <div>
-                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                                <h3 className="text-2xl font-bold text-white mb-6">
                                     Let&apos;s Start a Conversation
                                 </h3>
-                                <p className="text-gray-600 dark:text-gray-300 mb-8">
+                                <p className="text-muted mb-8">
                                     I&apos;m always open to discussing new
                                     opportunities, creative projects, or
                                     potential collaborations. Feel free to reach
@@ -250,24 +245,24 @@ const ContactForm: React.FC = () => {
                                 {contactInfo.map((info, index) => (
                                     <div
                                         key={index}
-                                        className="flex items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/20 hover:shadow-xl dark:hover:shadow-gray-900/40 transition-all duration-300 group"
+                                        className="flex items-center p-4 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(180,83,9,0.15)]"
                                     >
-                                        <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg mr-4 group-hover:scale-110 transition-transform duration-300">
-                                            <info.icon className="w-6 h-6 text-white" />
+                                        <div className="p-3 bg-accent/10 rounded-xl mr-4 group-hover:bg-accent/20 transition-colors duration-300">
+                                            <info.icon className="w-6 h-6 text-accent" />
                                         </div>
                                         <div>
-                                            <h4 className="font-semibold text-gray-900 dark:text-white">
+                                            <h4 className="font-semibold text-white">
                                                 {info.label}
                                             </h4>
                                             {info.href !== "#" ? (
                                                 <a
                                                     href={info.href}
-                                                    className="text-blue-600 dark:text-blue-400 hover:underline"
+                                                    className="text-gray-400 hover:text-accent transition-colors duration-200"
                                                 >
                                                     {info.value}
                                                 </a>
                                             ) : (
-                                                <p className="text-gray-600 dark:text-gray-300">
+                                                <p className="text-gray-400">
                                                     {info.value}
                                                 </p>
                                             )}
@@ -277,14 +272,14 @@ const ContactForm: React.FC = () => {
                             </div>
 
                             {/* Availability Status */}
-                            <div className="p-6 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border border-green-200 dark:border-green-700">
+                            <div className="p-6 bg-surface/50 rounded-[24px] border border-accent/20">
                                 <div className="flex items-center mb-2">
                                     <div className="w-3 h-3 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-                                    <span className="font-semibold text-green-800 dark:text-green-300">
+                                    <span className="font-semibold text-white">
                                         {profile.availability.status}
                                     </span>
                                 </div>
-                                <p className="text-green-700 dark:text-green-400 text-sm">
+                                <p className="text-muted text-sm">
                                     Available for{" "}
                                     {profile.availability.preferred_work_type
                                         .join(", ")
@@ -295,7 +290,8 @@ const ContactForm: React.FC = () => {
                         </div>
 
                         {/* Contact Form */}
-                        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl dark:shadow-gray-900/20 p-8">
+                        <div className="bg-surface rounded-[24px] shadow-lg border border-white/5 p-8 relative overflow-hidden group hover:border-accent/20 transition-colors duration-300">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent opacity-50"></div>
                             <form
                                 ref={formRef}
                                 onSubmit={handleSubmit}
@@ -305,12 +301,12 @@ const ContactForm: React.FC = () => {
                                     <div>
                                         <label
                                             htmlFor="name"
-                                            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                                            className="block text-sm font-medium text-white mb-2"
                                         >
                                             Full Name
                                         </label>
                                         <div className="relative">
-                                            <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                            <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
                                             <input
                                                 type="text"
                                                 id="name"
@@ -318,7 +314,7 @@ const ContactForm: React.FC = () => {
                                                 value={formState.name}
                                                 onChange={handleInputChange}
                                                 required
-                                                className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                                                className="w-full pl-10 pr-4 py-3 bg-background border border-white/5 rounded-xl focus:ring-1 focus:ring-accent focus:border-accent text-white placeholder-gray-600 transition-all duration-200"
                                                 placeholder="John Doe"
                                             />
                                         </div>
@@ -326,12 +322,12 @@ const ContactForm: React.FC = () => {
                                     <div>
                                         <label
                                             htmlFor="email"
-                                            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                                            className="block text-sm font-medium text-white mb-2"
                                         >
                                             Email Address
                                         </label>
                                         <div className="relative">
-                                            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
                                             <input
                                                 type="email"
                                                 id="email"
@@ -339,7 +335,7 @@ const ContactForm: React.FC = () => {
                                                 value={formState.email}
                                                 onChange={handleInputChange}
                                                 required
-                                                className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                                                className="w-full pl-10 pr-4 py-3 bg-background border border-white/5 rounded-xl focus:ring-1 focus:ring-accent focus:border-accent text-white placeholder-gray-600 transition-all duration-200"
                                                 placeholder="john@example.com"
                                             />
                                         </div>
@@ -349,7 +345,7 @@ const ContactForm: React.FC = () => {
                                 <div>
                                     <label
                                         htmlFor="subject"
-                                        className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                                        className="block text-sm font-medium text-white mb-2"
                                     >
                                         Subject
                                     </label>
@@ -360,7 +356,7 @@ const ContactForm: React.FC = () => {
                                         value={formState.subject}
                                         onChange={handleInputChange}
                                         required
-                                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                                        className="w-full px-4 py-3 bg-background border border-white/5 rounded-xl focus:ring-1 focus:ring-accent focus:border-accent text-white placeholder-gray-600 transition-all duration-200"
                                         placeholder="Project Discussion"
                                     />
                                 </div>
@@ -368,12 +364,12 @@ const ContactForm: React.FC = () => {
                                 <div>
                                     <label
                                         htmlFor="message"
-                                        className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                                        className="block text-sm font-medium text-white mb-2"
                                     >
                                         Message
                                     </label>
                                     <div className="relative">
-                                        <MessageSquare className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                                        <MessageSquare className="absolute left-3 top-3 w-5 h-5 text-gray-500" />
                                         <textarea
                                             id="message"
                                             name="message"
@@ -381,7 +377,7 @@ const ContactForm: React.FC = () => {
                                             onChange={handleInputChange}
                                             required
                                             rows={6}
-                                            className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200 resize-none"
+                                            className="w-full pl-10 pr-4 py-3 bg-background border border-white/5 rounded-xl focus:ring-1 focus:ring-accent focus:border-accent text-white placeholder-gray-600 transition-all duration-200 resize-none"
                                             placeholder="Tell me about your project..."
                                         />
                                     </div>
@@ -390,7 +386,7 @@ const ContactForm: React.FC = () => {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                                    className="w-full bg-accent text-white font-semibold py-4 px-6 rounded-full hover:shadow-[0_0_20px_rgba(180,83,9,0.4)] transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none border border-white/10"
                                 >
                                     {isSubmitting ? (
                                         <>

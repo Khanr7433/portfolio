@@ -63,12 +63,12 @@ const About: React.FC = () => {
         <section
             id="about"
             ref={sectionRef}
-            className="py-20 bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden"
+            className="py-20 bg-background relative overflow-hidden"
         >
             {/* Background decoration */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-20 left-20 w-40 h-40 bg-blue-400/20 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-20 right-20 w-40 h-40 bg-purple-400/20 rounded-full blur-3xl"></div>
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-20 left-20 w-40 h-40 bg-blue-900/20 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-20 right-20 w-40 h-40 bg-accent-glow/20 rounded-full blur-3xl"></div>
             </div>
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -76,13 +76,10 @@ const About: React.FC = () => {
                 <div className="text-center mb-16">
                     <h2
                         ref={titleRef}
-                        className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-4"
+                        className="text-4xl md:text-5xl font-bold text-white mb-4"
                     >
                         About Me
                     </h2>
-                    <div className="mt-6 flex justify-center">
-                        <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
-                    </div>
                 </div>
 
                 <div ref={contentRef} className="max-w-6xl mx-auto">
@@ -90,10 +87,10 @@ const About: React.FC = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
                         {/* Text Content */}
                         <div>
-                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                            <h3 className="text-2xl font-bold text-white mb-6">
                                 Passionate Full Stack Developer
                             </h3>
-                            <div className="space-y-4 text-gray-600 dark:text-gray-300">
+                            <div className="space-y-4 text-muted">
                                 <p>{profile.basics.summary}</p>
                                 <p>
                                     I specialize in building modern, scalable
@@ -112,7 +109,7 @@ const About: React.FC = () => {
 
                             {/* Interests */}
                             <div className="mt-8">
-                                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                                <h4 className="text-lg font-semibold text-white mb-4">
                                     Interests & Focus Areas
                                 </h4>
                                 <div className="flex flex-wrap gap-3">
@@ -121,7 +118,7 @@ const About: React.FC = () => {
                                         .map((interest, index) => (
                                             <span
                                                 key={index}
-                                                className="px-3 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors duration-200"
+                                                className="px-3 py-2 bg-surface border border-accent/20 text-gray-300 rounded-full text-sm font-medium hover:border-accent/60 transition-colors duration-200"
                                             >
                                                 {interest}
                                             </span>
@@ -133,7 +130,7 @@ const About: React.FC = () => {
                         {/* Profile Image Placeholder */}
                         <div className="flex justify-center lg:justify-end">
                             <div className="relative">
-                                <div className="w-80 h-80 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
+                                <div className="w-80 h-80 bg-surface border border-white/10 rounded-[24px] flex items-center justify-center overflow-hidden">
                                     <div className="text-center text-white">
                                         <User
                                             size={120}
@@ -142,12 +139,12 @@ const About: React.FC = () => {
                                         <h4 className="text-2xl font-bold">
                                             {profile.basics.name}
                                         </h4>
-                                        <p className="text-blue-200">
+                                        <p className="text-accent">
                                             Full Stack Developer
                                         </p>
                                     </div>
                                 </div>
-                                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl blur-xl opacity-30"></div>
+                                <div className="absolute inset-0 bg-accent-glow/20 rounded-[24px] blur-xl -z-10"></div>
                             </div>
                         </div>
                     </div>
@@ -157,15 +154,15 @@ const About: React.FC = () => {
                         {stats.map((stat, index) => (
                             <div
                                 key={index}
-                                className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 hover:shadow-xl dark:hover:shadow-gray-900/40 transition-all duration-300 group"
+                                className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(180,83,9,0.15)]"
                             >
-                                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg mb-4 group-hover:scale-110 transition-transform duration-300">
-                                    <stat.icon className="w-6 h-6 text-white" />
+                                <div className="inline-flex items-center justify-center w-12 h-12 bg-accent/10 rounded-xl mb-4 group-hover:bg-accent/20 transition-colors duration-300">
+                                    <stat.icon className="w-6 h-6 text-accent" />
                                 </div>
-                                <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                                <h4 className="text-2xl font-bold text-white mb-2">
                                     {stat.value}
                                 </h4>
-                                <p className="text-gray-600 dark:text-gray-400 text-sm">
+                                <p className="text-muted text-sm">
                                     {stat.label}
                                 </p>
                             </div>

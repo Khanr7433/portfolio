@@ -88,21 +88,16 @@ const ToolCategory: React.FC<ToolCategoryProps> = ({
     return (
         <div
             ref={cardRef}
-            className="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 p-6 hover:shadow-xl dark:hover:shadow-gray-900/40 transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden"
+            className="group relative bg-surface rounded-[24px] overflow-hidden hover:shadow-[0_0_20px_rgba(180,83,9,0.15)] transition-all duration-500 border border-white/5 hover:border-accent/40 p-6"
         >
-            {/* Background gradient */}
-            <div
-                className={`absolute inset-0 bg-gradient-to-br ${color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
-            ></div>
-
             {/* Header */}
             <div className="flex items-center mb-4">
                 <div
-                    className={`p-3 bg-gradient-to-r ${color} rounded-xl mr-4 group-hover:scale-110 transition-transform duration-300`}
+                    className="p-3 bg-accent/10 rounded-xl mr-4 group-hover:bg-accent/20 transition-transform duration-300"
                 >
-                    <Icon className="w-6 h-6 text-white" />
+                    <Icon className="w-6 h-6 text-accent group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                <h3 className="text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">
                     {title}
                 </h3>
             </div>
@@ -112,12 +107,12 @@ const ToolCategory: React.FC<ToolCategoryProps> = ({
                 {tools.map((tool, toolIndex) => (
                     <div
                         key={toolIndex}
-                        className="flex items-center p-2 bg-gray-50 dark:bg-gray-700/50 rounded-lg group-hover:bg-gray-100 dark:group-hover:bg-gray-700 transition-colors duration-200"
+                        className="flex items-center p-2 bg-background/50 rounded-lg group-hover:bg-white/5 transition-colors duration-200 border border-white/5"
                     >
                         <div
-                            className={`w-2 h-2 bg-gradient-to-r ${color} rounded-full mr-3`}
+                            className="w-2 h-2 bg-accent/50 rounded-full mr-3 group-hover:bg-accent transition-colors duration-300"
                         ></div>
-                        <span className="text-sm text-gray-700 dark:text-gray-300 font-medium">
+                        <span className="text-sm text-gray-400 font-medium group-hover:text-white transition-colors duration-200">
                             {tool}
                         </span>
                     </div>
@@ -127,7 +122,7 @@ const ToolCategory: React.FC<ToolCategoryProps> = ({
             {/* Tool count badge */}
             <div className="absolute top-4 right-4">
                 <span
-                    className={`px-2 py-1 bg-gradient-to-r ${color} text-white text-xs font-bold rounded-full`}
+                    className="px-2 py-1 bg-accent/20 text-accent text-xs font-bold rounded-full group-hover:bg-accent group-hover:text-white transition-colors duration-300"
                 >
                     {tools.length}
                 </span>
@@ -227,13 +222,12 @@ const Tools: React.FC = () => {
         <section
             id="tools"
             ref={sectionRef}
-            className="py-20 bg-gray-900 relative overflow-hidden"
+            className="py-20 bg-background relative overflow-hidden"
         >
             {/* Background decoration */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-1/4 left-10 w-40 h-40 bg-blue-400/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-1/4 right-10 w-40 h-40 bg-purple-400/10 rounded-full blur-3xl"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-green-400/5 rounded-full blur-3xl"></div>
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-1/4 left-10 w-40 h-40 bg-blue-900/10 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-1/4 right-10 w-40 h-40 bg-accent-glow/10 rounded-full blur-3xl"></div>
             </div>
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -241,13 +235,13 @@ const Tools: React.FC = () => {
                 <div className="text-center mb-16">
                     <h2
                         ref={titleRef}
-                        className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-6"
+                        className="text-4xl md:text-5xl font-bold text-white mb-6"
                     >
                         Tools & Technologies
                     </h2>
                     <p
                         ref={subtitleRef}
-                        className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+                        className="text-lg text-muted max-w-2xl mx-auto"
                     >
                         The essential tools and technologies I use to bring
                         ideas to life
@@ -271,39 +265,39 @@ const Tools: React.FC = () => {
                 {/* Additional Stats */}
                 <div className="mt-16 text-center">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
-                        <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 hover:shadow-xl dark:hover:shadow-gray-900/40 transition-all duration-300 group">
-                            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2 group-hover:text-blue-500 dark:group-hover:text-blue-300 transition-colors duration-300">
+                        <div className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(180,83,9,0.15)]">
+                            <div className="text-3xl font-bold text-accent mb-2 group-hover:text-white transition-colors duration-300">
                                 {tools.development.ide.length +
                                     tools.development.buildTools.length}
                                 +
                             </div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
+                            <div className="text-sm text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
                                 Dev Tools
                             </div>
                         </div>
-                        <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 hover:shadow-xl dark:hover:shadow-gray-900/40 transition-all duration-300 group">
-                            <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2 group-hover:text-purple-500 dark:group-hover:text-purple-300 transition-colors duration-300">
+                        <div className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(180,83,9,0.15)]">
+                            <div className="text-3xl font-bold text-accent mb-2 group-hover:text-white transition-colors duration-300">
                                 {tools.design.ui.length}+
                             </div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
+                            <div className="text-sm text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
                                 Design Tools
                             </div>
                         </div>
-                        <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 hover:shadow-xl dark:hover:shadow-gray-900/40 transition-all duration-300 group">
-                            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2 group-hover:text-green-500 dark:group-hover:text-green-300 transition-colors duration-300">
+                        <div className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(180,83,9,0.15)]">
+                            <div className="text-3xl font-bold text-accent mb-2 group-hover:text-white transition-colors duration-300">
                                 {tools.deployment.platforms.length}+
                             </div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
+                            <div className="text-sm text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
                                 Platforms
                             </div>
                         </div>
-                        <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 hover:shadow-xl dark:hover:shadow-gray-900/40 transition-all duration-300 group">
-                            <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2 group-hover:text-orange-500 dark:group-hover:text-orange-300 transition-colors duration-300">
+                        <div className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(180,83,9,0.15)]">
+                            <div className="text-3xl font-bold text-accent mb-2 group-hover:text-white transition-colors duration-300">
                                 {tools.productivity.office.length +
                                     tools.productivity.browsers.length}
                                 +
                             </div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
+                            <div className="text-sm text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
                                 Productivity
                             </div>
                         </div>

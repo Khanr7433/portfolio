@@ -81,7 +81,7 @@ export default function RootLayout({
                 <meta name="theme-color" content="#111827" />
             </head>
             <body
-                className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-gray-900 text-white transition-colors duration-300`}
+                className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground transition-colors duration-300`}
             >
                 {children}
                 <SpeedInsights />

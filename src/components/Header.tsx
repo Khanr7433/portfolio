@@ -55,7 +55,7 @@ const Header: React.FC = () => {
         tl.fromTo(
             logoRef.current,
             { y: -50, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, ease: "back.out(1.7)" }
+            { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
         ).fromTo(
             navRef.current?.children || [],
             { y: -30, opacity: 0 },
@@ -234,12 +234,12 @@ const Header: React.FC = () => {
                         onClick={() => handleNavClick("#home", "Home")}
                     >
                         <div className="relative">
-                            <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-lg md:text-xl transform group-hover:scale-110 transition-all duration-300">
+                            <div className="w-10 h-10 md:w-12 md:h-12 bg-accent rounded-xl flex items-center justify-center text-white font-bold text-lg md:text-xl transform group-hover:scale-110 transition-all duration-300 border border-white/10">
                                 RK
                             </div>
-                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg blur opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+                            <div className="absolute inset-0 bg-accent rounded-xl blur opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
                         </div>
-                        <span className="ml-3 text-xl md:text-2xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                        <span className="ml-3 text-xl md:text-2xl font-bold text-white">
                             Rashid Khan
                         </span>
                     </div>
@@ -252,6 +252,8 @@ const Header: React.FC = () => {
                         {navItems.map((item, index) => {
                             const isActive =
                                 activeSection === item.href.substring(1);
+
+
                             return (
                                 <a
                                     key={index}
@@ -260,20 +262,13 @@ const Header: React.FC = () => {
                                         e.preventDefault();
                                         handleNavClick(item.href, item.name);
                                     }}
-                                    className={`relative font-medium transition-colors duration-300 group ${
+                                    className={`relative font-medium transition-colors duration-300 ${
                                         isActive
-                                            ? "text-blue-600 dark:text-blue-400"
-                                            : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                                            ? "text-white"
+                                            : "text-muted hover:text-white"
                                     }`}
                                 >
                                     {item.name}
-                                    <span
-                                        className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 ${
-                                            isActive
-                                                ? "w-full"
-                                                : "w-0 group-hover:w-full"
-                                        }`}
-                                    ></span>
                                 </a>
                             );
                         })}
@@ -288,7 +283,7 @@ const Header: React.FC = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={social.label}
-                                className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transform hover:scale-110 transition-all duration-300"
+                                className="p-2 text-gray-400 hover:text-accent transform hover:scale-110 transition-all duration-300"
                             >
                                 <social.icon size={20} />
                             </a>
@@ -299,7 +294,7 @@ const Header: React.FC = () => {
                     <div className="lg:hidden flex items-center space-x-2">
                         <button
                             onClick={toggleMenu}
-                            className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
+                            className="p-2 text-gray-400 hover:text-accent"
                             aria-label="Toggle menu"
                         >
                             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -311,7 +306,7 @@ const Header: React.FC = () => {
                 {isMenuOpen && (
                     <div
                         ref={mobileMenuRef}
-                        className="lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg border-t border-gray-200 dark:border-gray-700"
+                        className="lg:hidden absolute top-full left-0 right-0 bg-background shadow-lg border-t border-white/5"
                     >
                         <nav className="px-4 py-6 space-y-4">
                             {navItems.map((item, index) => {
@@ -330,15 +325,15 @@ const Header: React.FC = () => {
                                         }}
                                         className={`block text-lg font-medium transition-colors duration-300 ${
                                             isActive
-                                                ? "text-blue-600 dark:text-blue-400"
-                                                : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                                                ? "text-accent"
+                                                : "text-muted hover:text-accent"
                                         }`}
                                     >
                                         {item.name}
                                     </a>
                                 );
                             })}
-                            <div className="flex items-center space-x-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                            <div className="flex items-center space-x-4 pt-4 border-t border-white/5">
                                 {socialLinks.map((social, index) => (
                                     <a
                                         key={index}
@@ -346,7 +341,7 @@ const Header: React.FC = () => {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         aria-label={social.label}
-                                        className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
+                                        className="p-2 text-gray-400 hover:text-accent"
                                     >
                                         <social.icon size={20} />
                                     </a>
