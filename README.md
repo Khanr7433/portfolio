@@ -4,7 +4,7 @@ A stunning, modern portfolio website built with Next.js 15, TypeScript, Tailwind
 
 ## 🌐 Live Demo
 
-**[🚀 View Live Portfolio](https://portfolio-rashid-khan.vercel.app)**
+**[🚀 View Live Portfolio](https://khanr7433.infinityfreeapp.com/)**
 
 ## 🚀 Features
 
