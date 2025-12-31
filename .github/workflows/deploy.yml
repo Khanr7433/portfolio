@@ -9,6 +9,7 @@ jobs:
     deploy:
         name: "🚀 Deploy to https://khanr7433.infinityfreeapp.com"
         runs-on: ubuntu-latest
+        environment: Production
 
         steps:
             - name: 📂 Get latest code
