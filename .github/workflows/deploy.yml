@@ -1,4 +1,4 @@
-name: 🚀 Deploy to https://khanr7433.infinityfreeapp.com
+name: "🚀 Deploy to https://khanr7433.infinityfreeapp.com"
 
 on:
     push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
     deploy:
-        name: 🚀 Deploy to https://khanr7433.infinityfreeapp.com
+        name: "🚀 Deploy to https://khanr7433.infinityfreeapp.com"
         runs-on: ubuntu-latest
 
         steps:
@@ -22,7 +22,14 @@ jobs:
             - name: 📦 Install dependencies
               run: npm install
 
-            - name: 🔨 Build project
+            - name: � Create .env file with secrets
+              run: |
+                  echo "NEXT_PUBLIC_EMAILJS_SERVICE_ID=${{ secrets.NEXT_PUBLIC_EMAILJS_SERVICE_ID }}" >> .env.local
+                  echo "NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=${{ secrets.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID }}" >> .env.local
+                  echo "NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=${{ secrets.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}" >> .env.local
+                  echo "NEXT_PUBLIC_EMAILJS_TO_EMAIL=${{ secrets.NEXT_PUBLIC_EMAILJS_TO_EMAIL }}" >> .env.local
+
+            - name: �🔨 Build project
               run: npm run build
 
             - name: 📂 Sync files via FTP
