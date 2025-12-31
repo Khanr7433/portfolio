@@ -92,8 +92,14 @@ const Footer: React.FC = () => {
         >
             {/* Background decoration */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div ref={blob1Ref} className="absolute top-0 left-1/4 w-96 h-96 bg-blue-900/10 rounded-full blur-3xl"></div>
-                <div ref={blob2Ref} className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-glow/10 rounded-full blur-3xl"></div>
+                <div
+                    ref={blob1Ref}
+                    className="absolute top-0 left-1/4 w-96 h-96 bg-blue-900/10 rounded-full blur-3xl"
+                ></div>
+                <div
+                    ref={blob2Ref}
+                    className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-glow/10 rounded-full blur-3xl"
+                ></div>
             </div>
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -102,21 +108,10 @@ const Footer: React.FC = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                         {/* About Section */}
                         <div className="lg:col-span-2">
-                            <div className="flex items-center mb-6 group cursor-default">
-                                <div className="relative mr-4">
-                                    <div className="w-12 h-12 bg-accent rounded-xl flex items-center justify-center text-white font-bold text-xl border border-white/10 relative z-10 transition-transform duration-300 group-hover:scale-105">
-                                        RK
-                                    </div>
-                                    <div className="absolute inset-0 bg-accent rounded-xl blur opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
-                                </div>
-                                <div>
-                                    <h3 className="text-2xl font-bold text-white group-hover:text-accent transition-colors duration-300">
-                                        {profile.basics.name}
-                                    </h3>
-                                    <p className="text-muted">
-                                        Full Stack Developer
-                                    </p>
-                                </div>
+                            <div className="flex items-center mb-6 cursor-default">
+                                <span className="text-3xl font-bold text-white tracking-tight inline-block transition-all duration-300 hover:text-accent hover:scale-105">
+                                    RK.
+                                </span>
                             </div>
                             <p className="text-gray-300 leading-relaxed mb-6 max-w-md">
                                 {profile.basics.summary}

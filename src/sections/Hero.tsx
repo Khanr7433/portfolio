@@ -123,7 +123,6 @@ const Hero: React.FC = () => {
             <div ref={backgroundRef} className="absolute inset-0 z-0">
                 <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-900/20 rounded-full blur-[120px]"></div>
                 <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-accent-glow/20 rounded-full blur-[120px]"></div>
-                <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 mix-blend-overlay"></div>
             </div>
 
             {/* Content */}
@@ -134,7 +133,9 @@ const Hero: React.FC = () => {
                         ref={titleRef}
                         className="text-6xl sm:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight leading-none"
                     >
-                        <div className="mb-2 text-muted text-2xl sm:text-3xl font-medium tracking-normal">Hello, I&apos;m</div>
+                        <div className="mb-2 text-muted text-2xl sm:text-3xl font-medium tracking-normal">
+                            Hello, I&apos;m
+                        </div>
                         <span className="bg-gradient-to-r from-white via-white to-accent bg-clip-text text-transparent">
                             {profile.basics.name}
                         </span>

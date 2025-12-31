@@ -233,14 +233,8 @@ const Header: React.FC = () => {
                         className="flex items-center cursor-pointer group"
                         onClick={() => handleNavClick("#home", "Home")}
                     >
-                        <div className="relative">
-                            <div className="w-10 h-10 md:w-12 md:h-12 bg-accent rounded-xl flex items-center justify-center text-white font-bold text-lg md:text-xl transform group-hover:scale-110 transition-all duration-300 border border-white/10">
-                                RK
-                            </div>
-                            <div className="absolute inset-0 bg-accent rounded-xl blur opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
-                        </div>
-                        <span className="ml-3 text-xl md:text-2xl font-bold text-white">
-                            Rashid Khan
+                        <span className="text-2xl md:text-3xl font-bold text-white tracking-tight inline-block transition-all duration-300 hover:text-accent hover:scale-105">
+                            RK.
                         </span>
                     </div>
 
@@ -252,7 +246,6 @@ const Header: React.FC = () => {
                         {navItems.map((item, index) => {
                             const isActive =
                                 activeSection === item.href.substring(1);
-
 
                             return (
                                 <a
