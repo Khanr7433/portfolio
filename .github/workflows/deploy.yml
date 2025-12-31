@@ -22,12 +22,12 @@ jobs:
             - name: 📦 Install dependencies
               run: npm install
 
-            - name: � Create .env file with secrets
+            - name: 🔐 Create .env file with variables
               run: |
-                  echo "NEXT_PUBLIC_EMAILJS_SERVICE_ID=${{ secrets.NEXT_PUBLIC_EMAILJS_SERVICE_ID }}" >> .env.local
-                  echo "NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=${{ secrets.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID }}" >> .env.local
-                  echo "NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=${{ secrets.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}" >> .env.local
-                  echo "NEXT_PUBLIC_EMAILJS_TO_EMAIL=${{ secrets.NEXT_PUBLIC_EMAILJS_TO_EMAIL }}" >> .env.local
+                  echo "NEXT_PUBLIC_EMAILJS_SERVICE_ID=${{ vars.NEXT_PUBLIC_EMAILJS_SERVICE_ID }}" >> .env.local
+                  echo "NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=${{ vars.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID }}" >> .env.local
+                  echo "NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=${{ vars.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}" >> .env.local
+                  echo "NEXT_PUBLIC_EMAILJS_TO_EMAIL=${{ vars.NEXT_PUBLIC_EMAILJS_TO_EMAIL }}" >> .env.local
 
             - name: �🔨 Build project
               run: npm run build
