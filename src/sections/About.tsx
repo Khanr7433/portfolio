@@ -10,6 +10,10 @@ if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
 }
 
+import BackgroundEffects from "@/components/BackgroundEffects";
+
+// ... (imports remain the same)
+
 const About: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
@@ -66,19 +70,16 @@ const About: React.FC = () => {
             className="py-20 bg-background relative overflow-hidden"
         >
             {/* Background decoration */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-20 left-20 w-40 h-40 bg-blue-900/20 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-20 right-20 w-40 h-40 bg-accent-glow/20 rounded-full blur-3xl"></div>
-            </div>
+            <BackgroundEffects />
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Section Header */}
                 <div className="text-center mb-16">
                     <h2
                         ref={titleRef}
-                        className="text-4xl md:text-5xl font-bold text-white mb-4"
+                        className="text-5xl md:text-6xl font-heading font-bold text-white mb-6 tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
                     >
-                        About Me
+                        About <span className="text-accent">Me</span>
                     </h2>
                 </div>
 
@@ -87,10 +88,10 @@ const About: React.FC = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
                         {/* Text Content */}
                         <div>
-                            <h3 className="text-2xl font-bold text-white mb-6">
+                            <h3 className="text-3xl font-bold mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
                                 Passionate Full Stack Developer
                             </h3>
-                            <div className="space-y-4 text-muted">
+                            <div className="space-y-4 text-muted text-lg leading-relaxed">
                                 <p>{profile.basics.summary}</p>
                                 <p>
                                     I specialize in building modern, scalable
@@ -109,7 +110,7 @@ const About: React.FC = () => {
 
                             {/* Interests */}
                             <div className="mt-8">
-                                <h4 className="text-lg font-semibold text-white mb-4">
+                                <h4 className="text-xl font-semibold text-white mb-6">
                                     Interests & Focus Areas
                                 </h4>
                                 <div className="flex flex-wrap gap-3">
@@ -118,7 +119,7 @@ const About: React.FC = () => {
                                         .map((interest, index) => (
                                             <span
                                                 key={index}
-                                                className="px-3 py-2 bg-surface border border-accent/20 text-gray-300 rounded-full text-sm font-medium hover:border-accent/60 transition-colors duration-200"
+                                                className="px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 rounded-full text-sm font-medium hover:bg-accent/20 hover:border-accent/50 transition-all duration-300"
                                             >
                                                 {interest}
                                             </span>
@@ -129,22 +130,22 @@ const About: React.FC = () => {
 
                         {/* Profile Image Placeholder */}
                         <div className="flex justify-center lg:justify-end">
-                            <div className="relative">
-                                <div className="w-80 h-80 bg-surface border border-white/10 rounded-[24px] flex items-center justify-center overflow-hidden">
+                            <div className="relative group">
+                                <div className="w-80 h-80 bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] flex items-center justify-center overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
                                     <div className="text-center text-white">
                                         <User
                                             size={120}
-                                            className="mx-auto mb-4 opacity-30"
+                                            className="mx-auto mb-4 opacity-50 group-hover:text-accent transition-colors duration-300"
                                         />
-                                        <h4 className="text-2xl font-bold">
+                                        <h4 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
                                             {profile.basics.name}
                                         </h4>
-                                        <p className="text-accent">
+                                        <p className="text-accent font-medium mt-2">
                                             Full Stack Developer
                                         </p>
                                     </div>
                                 </div>
-                                <div className="absolute inset-0 bg-accent-glow/20 rounded-[24px] blur-xl -z-10"></div>
+                                <div className="absolute inset-0 bg-accent-glow/20 rounded-[24px] blur-2xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             </div>
                         </div>
                     </div>
@@ -154,15 +155,15 @@ const About: React.FC = () => {
                         {stats.map((stat, index) => (
                             <div
                                 key={index}
-                                className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(180,83,9,0.15)]"
+                                className="text-center p-8 bg-white/5 backdrop-blur-md rounded-[24px] shadow-lg border border-white/10 hover:border-accent/40 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(180,83,9,0.3)]"
                             >
-                                <div className="inline-flex items-center justify-center w-12 h-12 bg-accent/10 rounded-xl mb-4 group-hover:bg-accent/20 transition-colors duration-300">
-                                    <stat.icon className="w-6 h-6 text-accent" />
+                                <div className="inline-flex items-center justify-center w-14 h-14 bg-accent/10 rounded-2xl mb-4 group-hover:bg-accent/20 transition-colors duration-300">
+                                    <stat.icon className="w-7 h-7 text-accent" />
                                 </div>
-                                <h4 className="text-2xl font-bold text-white mb-2">
+                                <h4 className="text-3xl font-bold text-white mb-2">
                                     {stat.value}
                                 </h4>
-                                <p className="text-muted text-sm">
+                                <p className="text-muted font-medium">
                                     {stat.label}
                                 </p>
                             </div>

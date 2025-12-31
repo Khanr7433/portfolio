@@ -23,7 +23,7 @@ jobs:
             - name: 📦 Install dependencies
               run: npm install
 
-            - name: � Verify environment variables
+            - name: 📝 Verify environment variables
               run: |
                   echo "Checking if environment variables are set..."
                   echo "SERVICE_ID length: ${#NEXT_PUBLIC_EMAILJS_SERVICE_ID}"

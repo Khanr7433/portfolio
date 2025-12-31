@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { Play } from "lucide-react";
 import { profile } from "@/constants/profile";
+import BackgroundEffects from "@/components/BackgroundEffects";
 
 const Hero: React.FC = () => {
     const heroRef = useRef<HTMLElement>(null);
@@ -14,20 +15,13 @@ const Hero: React.FC = () => {
     const backgroundRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const tl = gsap.timeline({ delay: 0.5 });
-
-        // Background animation
-        gsap.fromTo(
-            backgroundRef.current,
-            { scale: 1.1, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 2, ease: "power2.out" }
-        );
+        const tl = gsap.timeline({ delay: 0.2 });
 
         // Main content animations
         tl.fromTo(
             titleRef.current,
-            { y: 100, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+            { y: 100, opacity: 0, filter: "blur(10px)" },
+            { y: 0, opacity: 1, filter: "blur(0px)", duration: 1, ease: "power3.out" }
         )
             .fromTo(
                 subtitleRef.current,
@@ -56,7 +50,7 @@ const Hero: React.FC = () => {
 
         // Parallax effect on scroll
         gsap.to(backgroundRef.current, {
-            yPercent: -30,
+            yPercent: -20,
             ease: "none",
             scrollTrigger: {
                 trigger: heroRef.current,
@@ -106,10 +100,10 @@ const Hero: React.FC = () => {
         setTimeout(typewriterEffect, 1500);
     }, []);
 
-    const handleViewProjects = () => {
-        const projectsSection = document.querySelector("#projects");
-        if (projectsSection) {
-            projectsSection.scrollIntoView({ behavior: "smooth" });
+    const handleScrollTo = (id: string) => {
+        const section = document.querySelector(id);
+        if (section) {
+            section.scrollIntoView({ behavior: "smooth" });
         }
     };
 
@@ -119,40 +113,42 @@ const Hero: React.FC = () => {
             ref={heroRef}
             className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
         >
-            {/* Background Gradients */}
+            {/* Background Gradients & Particles */}
             <div ref={backgroundRef} className="absolute inset-0 z-0">
-                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-900/20 rounded-full blur-[120px]"></div>
-                <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-accent-glow/20 rounded-full blur-[120px]"></div>
+                <BackgroundEffects />
             </div>
 
             {/* Content */}
             <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center min-h-screen">
-                <div className="max-w-4xl mx-auto text-center">
+                <div className="max-w-5xl mx-auto text-center">
                     {/* Main Title */}
-                    <h1
-                        ref={titleRef}
-                        className="text-6xl sm:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight leading-none"
-                    >
-                        <div className="mb-2 text-muted text-2xl sm:text-3xl font-medium tracking-normal">
+                    <div className="mb-8">
+                        <div className="mb-4 text-muted text-xl sm:text-2xl font-medium tracking-wide uppercase opacity-80">
                             Hello, I&apos;m
                         </div>
-                        <span className="bg-gradient-to-r from-white via-white to-accent bg-clip-text text-transparent">
-                            {profile.basics.name}
-                        </span>
-                    </h1>
+                        <h1
+                            ref={titleRef}
+                            className="text-7xl sm:text-8xl lg:text-9xl font-heading font-bold text-white mb-2 tracking-tighter leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+                        >
+                             <span className="bg-gradient-to-r from-white via-white to-gray-400 bg-clip-text text-transparent">
+                                {profile.basics.name}
+                            </span>
+                        </h1>
+                        <div className="h-1 w-24 mx-auto bg-accent rounded-full mt-6 mb-6 shadow-[0_0_15px_rgba(180,83,9,0.5)]"></div>
+                    </div>
 
                     {/* Animated Subtitle */}
                     <div
                         ref={subtitleRef}
-                        className="text-2xl sm:text-3xl font-medium text-muted mb-8 h-12 flex items-center justify-center"
+                        className="text-2xl sm:text-4xl font-light text-accent-glow mb-8 h-12 flex items-center justify-center tracking-wide"
                     >
-                        {/* Typewriter text will be inserted here */}
+                        {/* Typewriter text */}
                     </div>
 
                     {/* Description */}
                     <p
                         ref={descriptionRef}
-                        className="text-lg sm:text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed text-center"
+                        className="text-lg sm:text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed text-center"
                     >
                         {profile.basics.summary}
                     </p>
@@ -160,14 +156,21 @@ const Hero: React.FC = () => {
                     {/* CTA Buttons */}
                     <div
                         ref={ctaRef}
-                        className="flex justify-center items-center gap-4"
+                        className="flex flex-col sm:flex-row justify-center items-center gap-6"
                     >
                         <button
-                            onClick={handleViewProjects}
-                            className="px-8 py-4 bg-accent text-white font-semibold rounded-full hover:bg-accent-glow hover:scale-105 transition-all duration-300 flex items-center gap-2 shadow-[0_0_20px_rgba(180,83,9,0.4)]"
+                            onClick={() => handleScrollTo("#projects")}
+                            className="group px-8 py-4 bg-accent text-white font-semibold rounded-full hover:bg-accent-glow hover:scale-105 transition-all duration-300 flex items-center gap-2 shadow-[0_0_25px_rgba(180,83,9,0.4)] ring-2 ring-transparent hover:ring-white/20"
                         >
-                            <Play size={20} fill="currentColor" />
+                            <Play size={20} fill="currentColor" className="group-hover:translate-x-1 transition-transform" />
                             View Projects
+                        </button>
+                        
+                        <button
+                            onClick={() => handleScrollTo("#contact-form")}
+                            className="group px-8 py-4 bg-transparent border-2 border-white/10 text-white font-semibold rounded-full hover:bg-white/5 hover:border-white/30 transition-all duration-300 flex items-center gap-2 backdrop-blur-sm"
+                        >
+                            Contact Me
                         </button>
                     </div>
                 </div>

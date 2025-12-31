@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
@@ -12,6 +12,12 @@ const inter = Inter({
 
 const jetbrainsMono = JetBrains_Mono({
     variable: "--font-jetbrains-mono",
+    subsets: ["latin"],
+    display: "swap",
+});
+
+const outfit = Outfit({
+    variable: "--font-outfit",
     subsets: ["latin"],
     display: "swap",
 });
@@ -63,7 +69,7 @@ export default function RootLayout({
                 <meta name="theme-color" content="#111827" />
             </head>
             <body
-                className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground transition-colors duration-300`}
+                className={`${inter.variable} ${jetbrainsMono.variable} ${outfit.variable} font-sans antialiased bg-background text-foreground transition-colors duration-300`}
             >
                 {children}
                 <SpeedInsights />

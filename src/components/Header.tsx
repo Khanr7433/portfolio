@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { Menu, X, Github, Linkedin, Mail } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { profile } from "@/constants/profile";
+import BackgroundEffects from "@/components/BackgroundEffects";
 
 const Header: React.FC = () => {
     const headerRef = useRef<HTMLElement>(null);
@@ -42,9 +43,10 @@ const Header: React.FC = () => {
 
     useEffect(() => {
         // Set active section based on pathname
+        // Set active section based on pathname
         if (pathname === "/all-projects") {
             setActiveSection("projects");
-            return; // Don't set up scroll listeners for all-projects page
+            // Do NOT return here, we need the scroll listener for the background effect
         } else {
             setActiveSection("home"); // Default to home for main page
         }
@@ -69,10 +71,13 @@ const Header: React.FC = () => {
             "-=0.4"
         );
 
-        // Scroll effect and fallback active section detection
+        // Scroll effect and active section detection
         const handleScroll = () => {
             const scrollY = window.scrollY;
             setIsScrolled(scrollY > 50);
+
+            // Skip section detection on non-home pages
+            if (pathname !== "/") return;
 
             // Fallback: Manual section detection based on scroll position
             const sections = navItems
@@ -158,9 +163,10 @@ const Header: React.FC = () => {
         // Animate header background on scroll
         gsap.to(headerRef.current, {
             backgroundColor: isScrolled
-                ? "rgba(17, 24, 39, 0.95)"
+                ? "rgba(17, 24, 39, 0.7)" // Reduced opacity for glassy look
                 : "transparent",
-            backdropFilter: isScrolled ? "blur(10px)" : "none",
+            backdropFilter: isScrolled ? "blur(12px)" : "none", // Increased blur
+            borderBottom: isScrolled ? "1px solid rgba(255, 255, 255, 0.1)" : "1px solid transparent", // Added subtle border
             duration: 0.3,
             ease: "power2.out",
         });
@@ -221,12 +227,18 @@ const Header: React.FC = () => {
     return (
         <header
             ref={headerRef}
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-hidden ${
                 isScrolled ? "shadow-lg" : ""
             }`}
         >
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16 md:h-20">
+            {/* Background Effects - Visible mostly when scrolled or for subtle depth */}
+            <div className={`absolute inset-0 transition-opacity duration-300 ${isScrolled ? "opacity-100" : "opacity-0"}`}>
+                 <div className="absolute inset-0 bg-background/50"></div>
+                 <BackgroundEffects />
+            </div>
+            
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="flex items-center justify-between h-14 md:h-16">
                     {/* Logo */}
                     <div
                         ref={logoRef}
@@ -262,6 +274,9 @@ const Header: React.FC = () => {
                                     }`}
                                 >
                                     {item.name}
+                                    {isActive && (
+                                        <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-accent rounded-full"></span>
+                                    )}
                                 </a>
                             );
                         })}
@@ -299,7 +314,7 @@ const Header: React.FC = () => {
                 {isMenuOpen && (
                     <div
                         ref={mobileMenuRef}
-                        className="lg:hidden absolute top-full left-0 right-0 bg-background shadow-lg border-t border-white/5"
+                        className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl shadow-lg border-t border-white/5"
                     >
                         <nav className="px-4 py-6 space-y-4">
                             {navItems.map((item, index) => {

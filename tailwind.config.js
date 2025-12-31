@@ -16,6 +16,11 @@ module.exports = {
             fontFamily: {
                 sans: ["var(--font-inter)", "system-ui", "sans-serif"],
                 mono: ["var(--font-jetbrains-mono)", "monospace"],
+                heading: [
+                    "var(--font-outfit)",
+                    "var(--font-inter)",
+                    "sans-serif",
+                ],
             },
             animation: {
                 gradient: "gradient 15s ease infinite",

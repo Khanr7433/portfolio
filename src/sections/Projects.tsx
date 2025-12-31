@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ExternalLink, Github, Calendar, Tag } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { projects } from "@/constants/projects";
+import BackgroundEffects from "@/components/BackgroundEffects";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -16,90 +17,55 @@ interface ProjectCardProps {
     index: number;
 }
 
+const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
+    });
+};
+
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
     const cardRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const cardElement = cardRef.current;
+        const card = cardRef.current;
+        const image = imageRef.current;
 
-        if (cardElement) {
-            gsap.fromTo(
-                cardElement,
-                { y: 50, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 0.8,
-                    delay: index * 0.2,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: cardElement,
-                        start: "top 80%",
-                        toggleActions: "play none none reverse",
-                    },
-                }
-            );
-
-            // Hover animations
-            const handleMouseEnter = () => {
-                gsap.to(imageRef.current, {
+        if (card && image) {
+            // Hover animation for image
+            card.addEventListener("mouseenter", () => {
+                gsap.to(image, {
                     scale: 1.05,
-                    duration: 0.3,
+                    duration: 0.5,
                     ease: "power2.out",
                 });
-            };
+            });
 
-            const handleMouseLeave = () => {
-                gsap.to(imageRef.current, {
+            card.addEventListener("mouseleave", () => {
+                gsap.to(image, {
                     scale: 1,
-                    duration: 0.3,
+                    duration: 0.5,
                     ease: "power2.out",
                 });
-            };
-
-            cardElement.addEventListener("mouseenter", handleMouseEnter);
-            cardElement.addEventListener("mouseleave", handleMouseLeave);
-
-            return () => {
-                cardElement.removeEventListener("mouseenter", handleMouseEnter);
-                cardElement.removeEventListener("mouseleave", handleMouseLeave);
-            };
+            });
         }
-    }, [index]);
-
-    const formatDate = (dateString: string) => {
-        const [year, month] = dateString.split("-");
-        const monthNames = [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-        ];
-        return `${monthNames[parseInt(month) - 1]} ${year}`;
-    };
+    }, []);
 
     return (
         <div
             ref={cardRef}
-            className="group relative bg-surface rounded-[24px] overflow-hidden hover:shadow-[0_0_25px_rgba(180,83,9,0.2)] transition-all duration-500 border border-accent/20 hover:border-accent/50"
+            className="group relative bg-white/5 backdrop-blur-md rounded-[24px] overflow-hidden hover:shadow-[0_0_30px_rgba(180,83,9,0.25)] transition-all duration-500 border border-white/10 hover:border-accent/50 hover:-translate-y-2"
         >
             {/* Project Image/Visual */}
-            <div className="relative h-48 sm:h-56 bg-surface overflow-hidden group-hover:bg-slate-900 transition-colors duration-500">
+            <div className="relative h-48 sm:h-60 bg-surface overflow-hidden group-hover:bg-slate-900 transition-colors duration-500">
                 <div
                     ref={imageRef}
-                    className="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center group-hover:from-slate-800 group-hover:to-slate-900 transition-all duration-500"
+                    className="absolute inset-0 bg-gradient-to-br from-slate-900/80 to-slate-800/80 flex items-center justify-center group-hover:from-slate-800 group-hover:to-slate-900 transition-all duration-500"
                 >
                     <div className="text-center transform transition-transform duration-500 group-hover:scale-110">
-                        <div className="w-16 h-16 mx-auto mb-4 bg-accent/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-accent/20 group-hover:border-accent/50 group-hover:shadow-[0_0_20px_rgba(180,83,9,0.3)] transition-all duration-300">
+                        <div className="w-16 h-16 mx-auto mb-4 bg-accent/20 backdrop-blur-md rounded-full flex items-center justify-center border border-accent/20 group-hover:border-accent/50 group-hover:shadow-[0_0_20px_rgba(180,83,9,0.3)] transition-all duration-300">
                             <Tag className="w-8 h-8 text-accent group-hover:text-white transition-colors duration-300" />
                         </div>
                         <h3 className="text-xl font-bold text-gray-200 px-4 group-hover:text-white transition-colors duration-300">
@@ -110,7 +76,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
 
                 {/* Category Badge */}
                 <div className="absolute top-4 right-4">
-                    <span className="px-3 py-1 bg-black/40 backdrop-blur-md border border-white/10 text-gray-300 text-xs font-medium rounded-full hover:bg-black/60 transition-colors duration-300">
+                    <span className="px-3 py-1 bg-black/60 backdrop-blur-xl border border-white/10 text-gray-300 text-xs font-medium rounded-full hover:bg-black/80 transition-colors duration-300">
                         {project.category}
                     </span>
                 </div>
@@ -118,59 +84,59 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                 {/* Project Type Badge */}
                 <div className="absolute top-4 left-4">
                     <span
-                        className={`px-2 py-1 text-xs font-medium rounded-full backdrop-blur-md ${
+                        className={`px-3 py-1 text-xs font-medium rounded-full backdrop-blur-xl border ${
                             projects.major.some((p) => p.id === project.id)
-                                ? "bg-accent/20 text-accent border border-accent/30"
-                                : "bg-slate-700/50 text-gray-300 border border-white/10"
+                                ? "bg-accent/30 text-white border-accent/40"
+                                : "bg-slate-700/60 text-gray-300 border-white/10"
                         }`}
                     >
                         {projects.major.some((p) => p.id === project.id)
-                            ? "Major"
-                            : "Minor"}
+                            ? "Major Project"
+                            : "Minor Project"}
                     </span>
                 </div>
             </div>
 
             {/* Content */}
-            <div className="p-6">
+            <div className="p-8">
                 {/* Title and Duration */}
-                <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">
+                <div className="flex items-start justify-between mb-4">
+                    <h3 className="text-2xl font-bold text-white group-hover:text-accent transition-colors duration-300">
                         {project.title}
                     </h3>
-                    <div className="flex items-center text-sm text-gray-400">
-                        <Calendar className="w-4 h-4 mr-1" />
+                    <div className="flex items-center text-sm text-muted bg-white/5 px-3 py-1 rounded-full">
+                        <Calendar className="w-4 h-4 mr-2" />
                         <span>{formatDate(project.duration.start)}</span>
                     </div>
                 </div>
 
                 {/* Description */}
-                <p className="text-muted text-sm leading-relaxed mb-4 line-clamp-3">
+                <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3">
                     {project.description}
                 </p>
 
                 {/* Role */}
-                <div className="mb-4">
-                    <span className="inline-block px-3 py-1 bg-accent/10 border border-accent/20 text-accent text-xs font-medium rounded-full">
+                <div className="mb-6">
+                    <span className="inline-block px-4 py-1.5 bg-accent/10 border border-accent/20 text-accent text-xs font-semibold rounded-full uppercase tracking-wider">
                         {project.role}
                     </span>
                 </div>
 
                 {/* Technologies */}
-                <div className="mb-6">
+                <div className="mb-8">
                     <div className="flex flex-wrap gap-2">
                         {project.technologies
                             .slice(0, 6)
                             .map((tech, techIndex) => (
                                 <span
                                     key={techIndex}
-                                    className="px-2 py-1 bg-background border border-white/5 text-gray-300 text-xs rounded-md hover:bg-accent/10 hover:text-accent hover:border-accent/20 transition-colors duration-200"
+                                    className="px-2.5 py-1 bg-white/5 border border-white/5 text-gray-300 text-xs rounded-md hover:bg-accent/10 hover:text-white hover:border-accent/20 transition-colors duration-200"
                                 >
                                     {tech}
                                 </span>
                             ))}
                         {project.technologies.length > 6 && (
-                            <span className="px-2 py-1 bg-background border border-white/5 text-gray-400 text-xs rounded-md">
+                            <span className="px-2.5 py-1 bg-white/5 border border-white/5 text-gray-400 text-xs rounded-md">
                                 +{project.technologies.length - 6} more
                             </span>
                         )}
@@ -178,13 +144,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                 </div>
 
                 {/* Actions */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4 pt-6 border-t border-white/5">
                     {project.github && (
                         <a
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 bg-background border border-white/10 text-white text-sm font-medium rounded-lg hover:bg-surface hover:border-accent/30 transition-colors duration-200"
+                            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-white/5 border border-white/10 text-white text-sm font-semibold rounded-xl hover:bg-white/10 hover:border-white/20 transition-all duration-200"
                         >
                             <Github className="w-4 h-4" />
                             Code
@@ -195,7 +161,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                             href={project.liveDemo}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-glow transition-colors duration-200 shadow-lg hover:shadow-accent/20"
+                            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-accent text-white text-sm font-semibold rounded-xl hover:bg-accent-glow hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-accent/20"
                         >
                             <ExternalLink className="w-4 h-4" />
                             Live Demo
@@ -212,38 +178,17 @@ const Projects: React.FC = () => {
     const titleRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
     const router = useRouter();
-
-    // Combine all projects and shuffle them
-    const allProjects = useMemo(
-        () => [...projects.major, ...projects.minor],
-        []
-    );
-
-    // State for featured projects to avoid hydration mismatch
+    // Local state not needed for navigation approach
+    
+    // Select top 3 projects for preview
     const [featuredProjects, setFeaturedProjects] = useState<
-        typeof allProjects
-    >(
-        allProjects.slice(0, 5) // Show first 5 initially to match server render
-    );
-
-    // Shuffle function
-    const shuffleArray = <T,>(array: T[]): T[] => {
-        const shuffled = [...array];
-        for (let i = shuffled.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-        }
-        return shuffled;
-    };
-
-    const handleViewAllProjects = () => {
-        router.push("/all-projects");
-    };
+        (typeof projects.major | typeof projects.minor)
+    >([]);
 
     useEffect(() => {
-        // Only shuffle on client side to avoid hydration mismatch
-        setFeaturedProjects(shuffleArray(allProjects).slice(0, 5));
-    }, [allProjects]);
+        const allProjects = [...projects.major, ...projects.minor];
+        setFeaturedProjects(allProjects.slice(0, 3));
+    }, []);
 
     useEffect(() => {
         if (titleRef.current && subtitleRef.current) {
@@ -269,11 +214,11 @@ const Projects: React.FC = () => {
                 {
                     y: 0,
                     opacity: 1,
-                    duration: 0.6,
+                    duration: 0.8,
                     delay: 0.2,
                     ease: "power2.out",
                     scrollTrigger: {
-                        trigger: subtitleRef.current,
+                        trigger: titleRef.current,
                         start: "top 80%",
                         toggleActions: "play none none reverse",
                     },
@@ -282,31 +227,37 @@ const Projects: React.FC = () => {
         }
     }, []);
 
+    const handleViewAllProjects = () => {
+        router.push('/all-projects');
+    };
+
     return (
         <section
             id="projects"
             ref={sectionRef}
             className="py-20 bg-background relative overflow-hidden"
         >
+            <BackgroundEffects />
+
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Section Header */}
                 <div className="text-center mb-16">
                     <h2
                         ref={titleRef}
-                        className="text-4xl md:text-5xl font-bold text-white mb-4"
+                        className="text-5xl md:text-6xl font-heading font-bold text-white mb-6 tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
                     >
-                        Featured Projects
+                        Featured <span className="text-accent">Projects</span>
                     </h2>
                     <p
                         ref={subtitleRef}
-                        className="text-lg text-muted max-w-2xl mx-auto"
+                        className="text-xl text-muted max-w-2xl mx-auto"
                     >
-                        A curated selection from my portfolio
+                        A curated selection of my work
                     </p>
                 </div>
 
                 {/* Projects Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                     {featuredProjects.map((project, index) => (
                         <ProjectCard
                             key={project.id}
@@ -317,12 +268,16 @@ const Projects: React.FC = () => {
                 </div>
 
                 {/* View More Button */}
-                <div className="text-center mt-12">
+                <div className="text-center">
                     <button
                         onClick={handleViewAllProjects}
-                        className="px-8 py-4 bg-accent text-white font-semibold rounded-full hover:bg-accent-glow hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(180,83,9,0.3)]"
+                        className="group px-10 py-4 bg-transparent border-2 border-accent text-accent font-bold rounded-full hover:bg-accent hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(180,83,9,0.2)] hover:shadow-[0_0_30px_rgba(180,83,9,0.5)] flex items-center justify-center gap-2 mx-auto"
                     >
                         View All Projects
+                        <ExternalLink
+                            size={20}
+                            className="group-hover:translate-x-1 transition-transform duration-300"
+                        />
                     </button>
                 </div>
             </div>

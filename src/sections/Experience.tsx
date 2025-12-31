@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Building } from "lucide-react";
 import { experience } from "@/constants/experience";
+import BackgroundEffects from "@/components/BackgroundEffects";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -60,7 +61,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
                     index % 2 === 0 ? "mr-auto pr-8" : "ml-auto pl-8"
                 }`}
             >
-                <div className="group relative bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300 p-6 hover:shadow-[0_0_20px_rgba(180,83,9,0.15)]">
+                <div className="group relative bg-white/5 backdrop-blur-md rounded-[24px] shadow-lg border border-white/10 hover:border-accent/40 transition-all duration-300 p-6 hover:shadow-[0_0_20px_rgba(180,83,9,0.2)] hover:-translate-y-1">
                     {/* Date badge */}
                     <div className="absolute -top-3 left-6">
                         <span className="px-3 py-1 bg-accent/20 border border-accent/40 text-accent-glow text-xs font-bold rounded-full shadow-lg backdrop-blur-sm group-hover:bg-accent group-hover:text-white transition-all duration-300">
@@ -74,15 +75,17 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
                             {exp.title}
                         </h3>
                         <div className="flex items-center gap-2 mt-2">
-                            <Building className="w-4 h-4 text-accent" />
-                            <h4 className="text-lg font-semibold text-accent">
+                            <div className="p-1.5 rounded-lg bg-accent/10 border border-accent/20">
+                                <Building className="w-4 h-4 text-accent" />
+                            </div>
+                            <h4 className="text-lg font-semibold text-gray-200">
                                 {exp.company}
                             </h4>
                         </div>
                     </div>
 
                     {/* Description */}
-                    <p className="text-muted text-sm leading-relaxed">
+                    <p className="text-gray-400 text-sm leading-relaxed">
                         {exp.description}
                     </p>
                 </div>
@@ -96,6 +99,7 @@ export const Experience: React.FC = () => {
     const titleRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
     const timelineRef = useRef<HTMLDivElement>(null);
+    const [showAll, setShowAll] = React.useState(false);
 
     useEffect(() => {
         if (titleRef.current && subtitleRef.current) {
@@ -165,23 +169,20 @@ export const Experience: React.FC = () => {
             className="py-20 bg-background relative overflow-hidden"
         >
             {/* Background decoration */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-900/10 rounded-full blur-3xl"></div>
-                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent-glow/10 rounded-full blur-3xl"></div>
-            </div>
+            <BackgroundEffects />
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Section Header */}
                 <div className="text-center mb-16">
                     <h2
                         ref={titleRef}
-                        className="text-4xl md:text-5xl font-bold text-white mb-4"
+                        className="text-5xl md:text-6xl font-heading font-bold text-white mb-6 tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
                     >
-                        Work Experience
+                        Work <span className="text-accent">Experience</span>
                     </h2>
                     <p
                         ref={subtitleRef}
-                        className="text-lg text-muted max-w-2xl mx-auto"
+                        className="text-xl text-muted max-w-2xl mx-auto"
                     >
                         My professional journey in software development
                     </p>
@@ -206,17 +207,40 @@ export const Experience: React.FC = () => {
                             ></div>
                         </div>
 
-                        {experience.map(
-                            (exp: (typeof experience)[0], index: number) => (
-                                <ExperienceCard
-                                    key={exp.id}
-                                    exp={exp}
-                                    index={index}
-                                    isLast={index === experience.length - 1}
-                                />
-                            )
-                        )}
+                        {experience
+                            .slice(0, showAll ? experience.length : 1)
+                            .map(
+                                (exp: (typeof experience)[0], index: number) => (
+                                    <ExperienceCard
+                                        key={exp.id}
+                                        exp={exp}
+                                        index={index}
+                                        isLast={index === (showAll ? experience.length : 1) - 1}
+                                    />
+                                )
+                            )}
                     </div>
+                </div>
+
+                {/* Show More / Show Less Button */}
+                <div className="flex justify-center mt-12">
+                    <button
+                        onClick={() => setShowAll(!showAll)}
+                        className="group relative px-8 py-3 bg-white/5 backdrop-blur-sm border border-accent/20 rounded-full overflow-hidden hover:border-accent/60 transition-all duration-300"
+                    >
+                        <div className="absolute inset-0 bg-accent/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                        <span className="relative z-10 text-white font-medium flex items-center gap-2">
+                            {showAll ? "Show Less" : "Show Full Work History"}
+                            <svg 
+                                className={`w-4 h-4 transition-transform duration-300 ${showAll ? "rotate-180" : ""}`} 
+                                fill="none" 
+                                viewBox="0 0 24 24" 
+                                stroke="currentColor"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </span>
+                    </button>
                 </div>
             </div>
         </section>

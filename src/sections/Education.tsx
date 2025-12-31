@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GraduationCap, MapPin, Award, BookOpen } from "lucide-react";
 import { education } from "../constants/education";
+import BackgroundEffects from "@/components/BackgroundEffects";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -76,7 +77,7 @@ const EducationCard: React.FC<EducationCardProps> = ({
                     index % 2 === 0 ? "mr-auto pr-8" : "ml-auto pl-8"
                 }`}
             >
-                <div className="group relative bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300 p-6 hover:shadow-[0_0_20px_rgba(180,83,9,0.15)]">
+                <div className="group relative bg-white/5 backdrop-blur-md rounded-[24px] shadow-lg border border-white/10 hover:border-accent/40 transition-all duration-300 p-6 hover:shadow-[0_0_20px_rgba(180,83,9,0.2)] hover:-translate-y-1">
                     {/* Duration badge */}
                     <div className="absolute -top-3 left-6">
                         <span className="px-3 py-1 bg-accent/20 border border-accent/40 text-accent-glow text-xs font-bold rounded-full shadow-lg backdrop-blur-sm group-hover:bg-accent group-hover:text-white transition-all duration-300">
@@ -93,7 +94,7 @@ const EducationCard: React.FC<EducationCardProps> = ({
                         <h4 className="text-lg font-semibold text-accent mb-2">
                             {edu.institution}
                         </h4>
-                        <div className="flex items-center gap-4 text-sm text-muted mb-2">
+                        <div className="flex items-center gap-4 text-sm text-gray-400 mb-2">
                             <div className="flex items-center gap-1">
                                 <MapPin className="w-4 h-4" />
                                 <span>{edu.location}</span>
@@ -147,14 +148,14 @@ const EducationCard: React.FC<EducationCardProps> = ({
                                         ) => (
                                             <span
                                                 key={courseIndex}
-                                                className="px-2 py-1 bg-background border border-white/5 text-gray-400 text-xs rounded-md font-medium"
+                                                className="px-2 py-1 bg-white/5 border border-white/5 text-gray-400 text-xs rounded-md font-medium"
                                             >
                                                 {course}
                                             </span>
                                         )
                                     )}
                                 {edu.relevantCourses.length > 6 && (
-                                    <span className="px-2 py-1 bg-background text-gray-500 text-xs rounded-md">
+                                    <span className="px-2 py-1 bg-white/5 text-gray-500 text-xs rounded-md">
                                         +{edu.relevantCourses.length - 6} more
                                     </span>
                                 )}
@@ -177,6 +178,7 @@ const Education: React.FC = () => {
     const titleRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
     const timelineRef = useRef<HTMLDivElement>(null);
+    const [showAll, setShowAll] = React.useState(false);
 
     useEffect(() => {
         if (titleRef.current && subtitleRef.current) {
@@ -232,7 +234,7 @@ const Education: React.FC = () => {
                     onUpdate: (self) => {
                         gsap.set(timelineRef.current, {
                             scaleY: self.progress,
-                            });
+                        });
                     },
                 },
             });
@@ -246,24 +248,20 @@ const Education: React.FC = () => {
             className="py-20 bg-background relative overflow-hidden"
         >
             {/* Background decoration */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-900/10 rounded-full blur-3xl"></div>
-                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent-glow/10 rounded-full blur-3xl"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent-glow/5 rounded-full blur-3xl"></div>
-            </div>
+            <BackgroundEffects />
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Section Header */}
                 <div className="text-center mb-16">
                     <h2
                         ref={titleRef}
-                        className="text-4xl md:text-5xl font-bold text-white mb-4"
+                        className="text-5xl md:text-6xl font-heading font-bold text-white mb-6 tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
                     >
                         Education
                     </h2>
                     <p
                         ref={subtitleRef}
-                        className="text-lg text-muted max-w-2xl mx-auto"
+                        className="text-xl text-muted max-w-2xl mx-auto"
                     >
                         My academic journey and educational achievements
                     </p>
@@ -288,22 +286,45 @@ const Education: React.FC = () => {
                             ></div>
                         </div>
 
-                        {education.map(
-                            (edu: (typeof education)[0], index: number) => (
-                                <EducationCard
-                                    key={edu.id}
-                                    edu={edu}
-                                    index={index}
-                                    isLast={index === education.length - 1}
-                                />
-                            )
-                        )}
+                        {education
+                            .slice(0, showAll ? education.length : 1)
+                            .map(
+                                (edu: (typeof education)[0], index: number) => (
+                                    <EducationCard
+                                        key={edu.id}
+                                        edu={edu}
+                                        index={index}
+                                        isLast={index === (showAll ? education.length : 1) - 1}
+                                    />
+                                )
+                            )}
                     </div>
+                </div>
+
+                {/* Show More / Show Less Button */}
+                <div className="flex justify-center mt-12">
+                    <button
+                        onClick={() => setShowAll(!showAll)}
+                        className="group relative px-8 py-3 bg-white/5 backdrop-blur-sm border border-accent/20 rounded-full overflow-hidden hover:border-accent/60 transition-all duration-300"
+                    >
+                        <div className="absolute inset-0 bg-accent/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                        <span className="relative z-10 text-white font-medium flex items-center gap-2">
+                            {showAll ? "Show Less" : "Show Full Education History"}
+                            <svg 
+                                className={`w-4 h-4 transition-transform duration-300 ${showAll ? "rotate-180" : ""}`} 
+                                fill="none" 
+                                viewBox="0 0 24 24" 
+                                stroke="currentColor"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </span>
+                    </button>
                 </div>
 
                 {/* Education Stats */}
                 <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-                    <div className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300">
+                    <div className="text-center p-6 bg-white/5 backdrop-blur-md rounded-[24px] shadow-lg border border-white/10 hover:border-accent/40 transition-all duration-300 hover:shadow-[0_0_20px_rgba(180,83,9,0.2)] hover:-translate-y-1">
                         <div className="text-3xl font-bold text-accent mb-2">
                             {education.length}
                         </div>
@@ -311,7 +332,7 @@ const Education: React.FC = () => {
                             Courses Completed
                         </div>
                     </div>
-                    <div className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300">
+                    <div className="text-center p-6 bg-white/5 backdrop-blur-md rounded-[24px] shadow-lg border border-white/10 hover:border-accent/40 transition-all duration-300 hover:shadow-[0_0_20px_rgba(180,83,9,0.2)] hover:-translate-y-1">
                         <div className="text-3xl font-bold text-accent mb-2">
                             9.11
                         </div>
@@ -319,7 +340,7 @@ const Education: React.FC = () => {
                             Current CGPA
                         </div>
                     </div>
-                    <div className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300">
+                    <div className="text-center p-6 bg-white/5 backdrop-blur-md rounded-[24px] shadow-lg border border-white/10 hover:border-accent/40 transition-all duration-300 hover:shadow-[0_0_20px_rgba(180,83,9,0.2)] hover:-translate-y-1">
                         <div className="text-3xl font-bold text-accent mb-2">
                             A+
                         </div>

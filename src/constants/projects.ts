@@ -2,262 +2,250 @@ export const projects = {
     major: [
         {
             id: "1",
-            title: "Collaborative Todo App",
+            title: "Project Management System",
             description:
-                "A modern, real-time collaborative task management application built with the MERN stack. Teams can manage tasks together with live updates, user assignments, drag & drop functionality, and comprehensive activity tracking.",
+                "A modern, real-time collaborative project management system built with the MERN stack (MongoDB, Express, React, Node.js) and Socket.io. Teams can manage projects and tasks together with live updates, user assignments, intuitive drag & drop functionality, project-based organization, and comprehensive activity tracking.",
             technologies: [
+                "JavaScript",
                 "React",
                 "Node.js",
                 "Express.js",
                 "MongoDB",
                 "Socket.io",
-                "Tailwind CSS",
-                "JWT",
-                "bcryptjs",
-                "Axios",
-                "Vite",
+                "Tailwind CSS"
             ],
             role: "Full Stack Developer",
             duration: {
-                start: "2024-10",
-                end: "2024-12",
+                start: "2025-07",
+                end: "2025-12"
             },
             highlights: [
-                "Real-time collaboration with Socket.io for live task updates",
-                "Drag & drop interface for intuitive task management",
-                "User authentication with JWT and role-based access",
-                "Activity logging with comprehensive audit trail",
-                "Responsive design with modern UI/UX",
+                "Real-time collaboration with Socket.io",
+                "Drag & drop task management",
+                "Role-based access control",
+                "Activity tracking and audit logs"
             ],
-            github: "https://github.com/Khanr7433/collab-todo-app",
-            liveDemo: "https://collab-todo-app.vercel.app/",
+            github: "https://github.com/Khanr7433/project-management-system",
+            liveDemo: "https://project-management-system-v2.vercel.app",
             category: "Web Development",
         },
         {
             id: "2",
-            title: "Project Approval System",
-            description:
-                "The Project Approval System is a web application designed to streamline the process of project approvals.",
-            technologies: [
-                "React",
-                "Tailwind CSS",
-                "Node.js",
-                "Express.js",
-                "MongoDB",
-                "jwt",
-                "bcryptjs",
-                "axios",
-                "multer",
-                "cloudinary",
-                "nodemailer",
-                "react-router-dom",
-                "react-toastify",
-            ],
-            role: "Full Stack Developer",
-            duration: {
-                start: "2024-12",
-                end: "2025-02",
-            },
-            highlights: [
-                "Implemented responsive design",
-                "Integrated with various APIs",
-                "Implemented role-based access for students and faculty to submit, review, and approve project proposals",
-                "Deployed the application for local testing using GitHub and Vercel",
-            ],
-            github: "https://github.com/Khanr7433/Project_approval_system",
-            liveDemo: "",
-            category: "Web Development",
-        },
-        {
-            id: "3",
-            title: "E-auction System",
-            description:
-                "The E-Auction System is a web application designed to streamline the process of auctioning products.",
-            technologies: [
-                "html",
-                "css",
-                "javascript",
-                "tailwind css",
-                "python",
-                "django",
-                "sqlite3",
-                "postgresql",
-            ],
-            role: "Full Stack Developer",
-            duration: {
-                start: "2024-08",
-                end: "2024-09",
-            },
-            highlights: [
-                "Implemented responsive design",
-                "Integrated with various APIs",
-                "Enabled real-time bidding functionality with automatic auction timers and winner detection",
-                "Applied user authentication and admin panel controls for managing product listings andusers",
-                "Deployed the application for local testing using GitHub and Vercel",
-            ],
-            github: "https://github.com/Khanr7433/E_Auction-system-using-django",
-            liveDemo: "",
-            category: "Web Development",
-        },
-        {
-            id: "4",
             title: "Next.js Authentication System",
             description:
-                "A comprehensive authentication system built with Next.js 15, featuring user registration, login, email verification, password reset, and profile management.",
+                "A comprehensive full-stack authentication system built with Next.js 15, TypeScript, MongoDB, and Tailwind CSS. This project demonstrates modern web development practices and implements a complete user authentication flow with email verification and password reset functionality.",
             technologies: [
-                "Next.js",
                 "TypeScript",
-                "Tailwind CSS",
+                "Next.js",
                 "MongoDB",
-                "Mongoose",
-                "JWT",
-                "bcryptjs",
-                "Nodemailer",
+                "Tailwind CSS"
             ],
             role: "Full Stack Developer",
             duration: {
-                start: "2024-11",
-                end: "2024-12",
+                start: "2025-07",
+                end: "2025-12"
             },
             highlights: [
-                "Complete authentication flow with email verification",
-                "Password reset functionality with secure tokens",
-                "Protected routes with middleware",
-                "Profile management with image uploads",
-                "Modern TypeScript implementation",
+                "Secure user authentication flow",
+                "Email verification integration",
+                "Password reset functionality",
+                "Protected routes and middleware"
             ],
             github: "https://github.com/Khanr7433/nextjs-auth-system",
             liveDemo: "https://nextjs-auth-system-phi.vercel.app",
             category: "Web Development",
         },
         {
-            id: "5",
-            title: "Translate App - React",
+            id: "3",
+            title: "Project Approval System",
             description:
-                "A modern React translation application with Tailwind CSS styling and Vite build tool. Support for 21 languages with text-to-speech and translation history features.",
+                "The Project Approval System is a web application designed to streamline the process of project approvals.",
             technologies: [
-                "React",
-                "Tailwind CSS",
-                "Vite",
-                "Axios",
-                "MyMemory Translation API",
                 "JavaScript",
+                "React",
+                "Node.js",
+                "Express.js",
+                "MongoDB"
+            ],
+            role: "Full Stack Developer",
+            duration: {
+                start: "2024-12",
+                end: "2025-02"
+            },
+            highlights: [
+                "Streamlined approval workflows",
+                "User role management",
+                "Automated notifications",
+                "Status tracking dashboard"
+            ],
+            github: "https://github.com/Khanr7433/Project_approval_system",
+            liveDemo: "https://project-approval-system-frontend.vercel.app",
+            category: "Web Development",
+        },
+        {
+            id: "4",
+            title: "E-Auction System",
+            description:
+                "The E-Auction System is a web application designed to streamline the process of auctioning products.",
+            technologies: [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "Django",
+                "Python"
+            ],
+            role: "Full Stack Developer",
+            duration: {
+                start: "2024-10",
+                end: "2025-05"
+            },
+            highlights: [
+                "Real-time bidding functionality",
+                "Auction timer and winner detection",
+                "User authentication and admin panel",
+                "Secure payment integration"
+            ],
+            github: "https://github.com/Khanr7433/E_Auction-system-using-django",
+            liveDemo: "https://e-auction-system-using-django.vercel.app",
+            category: "Web Development",
+        },
+        {
+            id: "5",
+            title: "Personal Dashboard",
+            description:
+                "A modern dashboard built with Next.js and Tailwind CSS to showcase personal portfolio and track various metrics.",
+            technologies: [
+                "JavaScript",
+                "Next.js",
+                "Tailwind CSS"
             ],
             role: "Frontend Developer",
             duration: {
-                start: "2024-06",
-                end: "2024-07",
+                start: "2025-05",
+                end: "2025-12"
             },
             highlights: [
-                "Multi-language translation support for 21 languages",
-                "Text-to-speech functionality using browser speech synthesis",
-                "Translation history with local storage",
-                "Language swapping and copy-to-clipboard features",
-                "Modern Google-inspired UI design",
+                "Responsive dashboard layout",
+                "Data visualization widgets",
+                "API integrations",
+                "Dark mode support"
             ],
-            github: "https://github.com/Khanr7433/translate-app-react",
-            liveDemo: "https://translate-app-react.vercel.app",
+            github: "https://github.com/Khanr7433/personal-dashboard",
+            liveDemo: "https://personal-dashboard-psi-ivory.vercel.app",
             category: "Web Development",
         },
     ],
     minor: [
         {
             id: "6",
-            title: "Personal Dashboard",
+            title: "VidTube",
             description:
-                "A modern dashboard built with Next.js and Tailwind CSS to showcase personal portfolio and track various metrics",
-            technologies: ["Next.js", "React", "Tailwind CSS", "JavaScript"],
-            role: "Full Stack Developer",
+                "A YouTube-like application for video streaming.",
+            technologies: ["JavaScript", "React", "API Integration"],
+            role: "Frontend Developer",
             duration: {
-                start: "2025-05-20",
-                end: "2025-05-25",
+                start: "2025-07",
+                end: "2025-12"
             },
-            highlights: [
-                "Implemented responsive design",
-                "Created reusable components",
-                "Integrated with various APIs",
-            ],
-            github: "https://github.com/Khanr7433/personal-dashboard",
-            liveDemo: "https://personal-dashboard-psi-ivory.vercel.app/",
+            highlights: [],
+            github: "https://github.com/Khanr7433/vidtube",
+            liveDemo: "",
             category: "Web Development",
         },
         {
             id: "7",
-            title: "Todo App - Modern Task Manager",
+            title: "Translate App",
             description:
-                "A beautiful and modern Todo application built with React, Vite, and Tailwind CSS. Features a stunning blue gradient design with smooth animations and intuitive user interface.",
-            technologies: [
-                "React",
-                "Vite",
-                "Tailwind CSS",
-                "Context API",
-                "Local Storage API",
-                "JavaScript",
-            ],
+                "A modern React translation application with support for multiple languages.",
+            technologies: ["JavaScript", "React", "Translation API"],
             role: "Frontend Developer",
             duration: {
-                start: "2024-05",
-                end: "2024-06",
+                start: "2025-07",
+                end: "2025-07"
             },
-            highlights: [
-                "Modern glassmorphism UI with blue gradient theme",
-                "Task statistics with visual progress indicators",
-                "Context API for state management",
-                "Local storage for data persistence",
-                "Responsive design with smooth animations",
-            ],
-            github: "https://github.com/Khanr7433/todo-app",
-            liveDemo: "https://todo-app-psi-sandy-14.vercel.app/",
+            highlights: [],
+            github: "https://github.com/Khanr7433/translate-app",
+            liveDemo: "",
             category: "Web Development",
         },
         {
             id: "8",
+            title: "Bakery Management",
+            description:
+                "A management system for bakery operations.",
+            technologies: ["Python", "Django"],
+            role: "Full Stack Developer",
+            duration: {
+                start: "2024-10",
+                end: "2024-11"
+            },
+            highlights: [],
+            github: "https://github.com/Khanr7433/bakery_management",
+            liveDemo: "https://bakery-management-one.vercel.app",
+            category: "Web Development",
+        },
+        {
+            id: "9",
             title: "Currency Converter",
             description:
-                "A modern currency converter application with real-time exchange rates and intuitive user interface.",
-            technologies: [
-                "React",
-                "Vite",
-                "Tailwind CSS",
-                "JavaScript",
-                "Currency API",
-            ],
+                "A modern currency converter application with real-time exchange rates.",
+            technologies: ["JavaScript", "React", "Currency API"],
             role: "Frontend Developer",
             duration: {
-                start: "2024-04",
-                end: "2024-05",
+                start: "2025-07",
+                end: "2025-07"
             },
-            highlights: [
-                "Real-time currency exchange rates",
-                "Support for multiple currencies",
-                "Responsive design with modern UI",
-                "Fast performance with Vite",
-                "Clean and intuitive user interface",
-            ],
+            highlights: [],
             github: "https://github.com/Khanr7433/currency-converter",
             liveDemo: "https://currency-converter-zeta-beryl.vercel.app",
             category: "Web Development",
         },
         {
-            id: "9",
-            title: "Password Generator",
+            id: "10",
+            title: "Ummat Calendar",
             description:
-                "A secure password generator application with customizable options for creating strong passwords.",
-            technologies: ["React", "Vite", "Tailwind CSS", "JavaScript"],
+                "A digital calendar application.",
+            technologies: ["JavaScript", "React", "Node.js"],
+            role: "Developer",
+            duration: {
+                start: "2025-12",
+                end: "2025-12"
+            },
+            highlights: [],
+            github: "https://github.com/Khanr7433/ummat-calendar",
+            liveDemo: "",
+            category: "Web Development",
+        },
+        {
+            id: "11",
+            title: "Smart Team Chat",
+            description:
+                "A real-time chat application for team collaboration.",
+            technologies: ["JavaScript", "Socket.io"],
+            role: "Backend Developer",
+            duration: {
+                start: "2025-09",
+                end: "2025-12"
+            },
+            highlights: [],
+            github: "https://github.com/Khanr7433/smart-team-chat",
+            liveDemo: "",
+            category: "Web Development",
+        },
+        {
+            id: "12",
+            title: "Snake Game",
+            description:
+                "Classic Snake game implemented in JavaScript.",
+            technologies: ["JavaScript", "HTML/CSS"],
             role: "Frontend Developer",
             duration: {
-                start: "2024-03",
-                end: "2024-04",
+                start: "2025-12",
+                end: "2025-12"
             },
-            highlights: [
-                "Customizable password length and character sets",
-                "Copy to clipboard functionality",
-                "Secure random password generation",
-                "Modern responsive design",
-                "User-friendly interface",
-            ],
-            github: "https://github.com/Khanr7433/password-generator",
-            liveDemo: "(https://password-generator-three-blue-53.vercel.app",
+            highlights: [],
+            github: "https://github.com/Khanr7433/snake-game",
+            liveDemo: "",
             category: "Web Development",
         },
     ],

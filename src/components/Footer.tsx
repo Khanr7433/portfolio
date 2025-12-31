@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Github, Linkedin, Mail, Heart, ArrowUp } from "lucide-react";
 import { profile } from "@/constants/profile";
+import BackgroundEffects from "@/components/BackgroundEffects";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -13,32 +14,8 @@ if (typeof window !== "undefined") {
 const Footer: React.FC = () => {
     const footerRef = useRef<HTMLElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
-    const blob1Ref = useRef<HTMLDivElement>(null);
-    const blob2Ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        // Blob animations
-        if (blob1Ref.current && blob2Ref.current) {
-            gsap.to(blob1Ref.current, {
-                scale: 1.2,
-                opacity: 0.15,
-                duration: 4,
-                repeat: -1,
-                yoyo: true,
-                ease: "sine.inOut",
-            });
-
-            gsap.to(blob2Ref.current, {
-                scale: 1.2,
-                opacity: 0.15,
-                duration: 5,
-                repeat: -1,
-                yoyo: true,
-                ease: "sine.inOut",
-                delay: 1,
-            });
-        }
-
         if (contentRef.current) {
             gsap.fromTo(
                 contentRef.current.children,
@@ -91,16 +68,7 @@ const Footer: React.FC = () => {
             className="relative bg-background text-white pt-20 pb-8 overflow-hidden"
         >
             {/* Background decoration */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div
-                    ref={blob1Ref}
-                    className="absolute top-0 left-1/4 w-96 h-96 bg-blue-900/10 rounded-full blur-3xl"
-                ></div>
-                <div
-                    ref={blob2Ref}
-                    className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-glow/10 rounded-full blur-3xl"
-                ></div>
-            </div>
+            <BackgroundEffects />
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div ref={contentRef}>
@@ -124,7 +92,7 @@ const Footer: React.FC = () => {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         aria-label={social.label}
-                                        className="group relative p-3 bg-surface rounded-full border border-white/10 hover:border-accent/40 transition-all duration-300 hover:shadow-[0_0_15px_rgba(180,83,9,0.2)]"
+                                        className="group relative p-3 bg-white/5 backdrop-blur-md rounded-full border border-white/10 hover:border-accent/40 transition-all duration-300 hover:shadow-[0_0_15px_rgba(180,83,9,0.2)]"
                                     >
                                         <social.icon className="w-5 h-5 text-gray-400 group-hover:text-accent transition-colors duration-300" />
                                     </a>
@@ -182,7 +150,7 @@ const Footer: React.FC = () => {
                         {/* Scroll to Top Button - Positioned on the right side */}
                         <button
                             onClick={scrollToTop}
-                            className="group absolute right-0 top-1/2 transform -translate-y-1/2 p-3 bg-surface border border-white/10 rounded-full hover:border-accent/40 hover:bg-accent hover:text-white transition-all duration-300 hover:shadow-[0_0_15px_rgba(180,83,9,0.3)]"
+                            className="group absolute right-0 top-1/2 transform -translate-y-1/2 p-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-full hover:border-accent/40 hover:bg-accent hover:text-white transition-all duration-300 hover:shadow-[0_0_15px_rgba(180,83,9,0.3)]"
                             aria-label="Scroll to top"
                         >
                             <ArrowUp className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors duration-300" />

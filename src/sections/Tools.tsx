@@ -13,6 +13,7 @@ import {
     LucideIcon,
 } from "lucide-react";
 import { tools } from "@/constants/tools";
+import BackgroundEffects from "@/components/BackgroundEffects";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -225,23 +226,20 @@ const Tools: React.FC = () => {
             className="py-20 bg-background relative overflow-hidden"
         >
             {/* Background decoration */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/4 left-10 w-40 h-40 bg-blue-900/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-1/4 right-10 w-40 h-40 bg-accent-glow/10 rounded-full blur-3xl"></div>
-            </div>
+            <BackgroundEffects />
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Section Header */}
                 <div className="text-center mb-16">
                     <h2
                         ref={titleRef}
-                        className="text-4xl md:text-5xl font-bold text-white mb-6"
+                        className="text-5xl md:text-6xl font-heading font-bold text-white mb-6 tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
                     >
                         Tools & Technologies
                     </h2>
                     <p
                         ref={subtitleRef}
-                        className="text-lg text-muted max-w-2xl mx-auto"
+                        className="text-xl text-muted max-w-2xl mx-auto"
                     >
                         The essential tools and technologies I use to bring
                         ideas to life
@@ -265,7 +263,7 @@ const Tools: React.FC = () => {
                 {/* Additional Stats */}
                 <div className="mt-16 text-center">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
-                        <div className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(180,83,9,0.15)]">
+                        <div className="text-center p-6 bg-white/5 backdrop-blur-md rounded-[24px] shadow-lg border border-white/10 hover:border-accent/40 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(180,83,9,0.2)] hover:-translate-y-1">
                             <div className="text-3xl font-bold text-accent mb-2 group-hover:text-white transition-colors duration-300">
                                 {tools.development.ide.length +
                                     tools.development.buildTools.length}
@@ -275,7 +273,7 @@ const Tools: React.FC = () => {
                                 Dev Tools
                             </div>
                         </div>
-                        <div className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(180,83,9,0.15)]">
+                        <div className="text-center p-6 bg-white/5 backdrop-blur-md rounded-[24px] shadow-lg border border-white/10 hover:border-accent/40 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(180,83,9,0.2)] hover:-translate-y-1">
                             <div className="text-3xl font-bold text-accent mb-2 group-hover:text-white transition-colors duration-300">
                                 {tools.design.ui.length}+
                             </div>
@@ -283,7 +281,7 @@ const Tools: React.FC = () => {
                                 Design Tools
                             </div>
                         </div>
-                        <div className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(180,83,9,0.15)]">
+                        <div className="text-center p-6 bg-white/5 backdrop-blur-md rounded-[24px] shadow-lg border border-white/10 hover:border-accent/40 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(180,83,9,0.2)] hover:-translate-y-1">
                             <div className="text-3xl font-bold text-accent mb-2 group-hover:text-white transition-colors duration-300">
                                 {tools.deployment.platforms.length}+
                             </div>
@@ -291,7 +289,7 @@ const Tools: React.FC = () => {
                                 Platforms
                             </div>
                         </div>
-                        <div className="text-center p-6 bg-surface rounded-[24px] shadow-lg border border-white/5 hover:border-accent/40 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(180,83,9,0.15)]">
+                        <div className="text-center p-6 bg-white/5 backdrop-blur-md rounded-[24px] shadow-lg border border-white/10 hover:border-accent/40 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(180,83,9,0.2)] hover:-translate-y-1">
                             <div className="text-3xl font-bold text-accent mb-2 group-hover:text-white transition-colors duration-300">
                                 {tools.productivity.office.length +
                                     tools.productivity.browsers.length}
