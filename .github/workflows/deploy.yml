@@ -22,12 +22,25 @@ jobs:
             - name: 📦 Install dependencies
               run: npm install
 
-            - name: � Build project
+            - name: � Verify environment variables
+              run: |
+                  echo "Checking if environment variables are set..."
+                  echo "SERVICE_ID length: ${#NEXT_PUBLIC_EMAILJS_SERVICE_ID}"
+                  echo "TEMPLATE_ID length: ${#NEXT_PUBLIC_EMAILJS_TEMPLATE_ID}"
+                  echo "PUBLIC_KEY length: ${#NEXT_PUBLIC_EMAILJS_PUBLIC_KEY}"
+                  echo "TO_EMAIL length: ${#NEXT_PUBLIC_EMAILJS_TO_EMAIL}"
               env:
-                  NEXT_PUBLIC_EMAILJS_SERVICE_ID: ${{ vars.NEXT_PUBLIC_EMAILJS_SERVICE_ID }}
-                  NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: ${{ vars.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID }}
-                  NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: ${{ vars.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}
-                  NEXT_PUBLIC_EMAILJS_TO_EMAIL: ${{ vars.NEXT_PUBLIC_EMAILJS_TO_EMAIL }}
+                  NEXT_PUBLIC_EMAILJS_SERVICE_ID: ${{ secrets.NEXT_PUBLIC_EMAILJS_SERVICE_ID }}
+                  NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID }}
+                  NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}
+                  NEXT_PUBLIC_EMAILJS_TO_EMAIL: ${{ secrets.NEXT_PUBLIC_EMAILJS_TO_EMAIL }}
+
+            - name: 🔨 Build project
+              env:
+                  NEXT_PUBLIC_EMAILJS_SERVICE_ID: ${{ secrets.NEXT_PUBLIC_EMAILJS_SERVICE_ID }}
+                  NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID }}
+                  NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}
+                  NEXT_PUBLIC_EMAILJS_TO_EMAIL: ${{ secrets.NEXT_PUBLIC_EMAILJS_TO_EMAIL }}
               run: npm run build
 
             - name: 📂 Sync files via FTP
