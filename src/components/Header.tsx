@@ -166,7 +166,9 @@ const Header: React.FC = () => {
                 ? "rgba(17, 24, 39, 0.7)" // Reduced opacity for glassy look
                 : "transparent",
             backdropFilter: isScrolled ? "blur(12px)" : "none", // Increased blur
-            borderBottom: isScrolled ? "1px solid rgba(255, 255, 255, 0.1)" : "1px solid transparent", // Added subtle border
+            borderBottom: isScrolled
+                ? "1px solid rgba(255, 255, 255, 0.1)"
+                : "1px solid transparent", // Added subtle border
             duration: 0.3,
             ease: "power2.out",
         });
@@ -227,16 +229,18 @@ const Header: React.FC = () => {
     return (
         <header
             ref={headerRef}
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-hidden ${
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
                 isScrolled ? "shadow-lg" : ""
             }`}
         >
             {/* Background Effects - Visible mostly when scrolled or for subtle depth */}
-            <div className={`absolute inset-0 transition-opacity duration-300 ${isScrolled ? "opacity-100" : "opacity-0"}`}>
-                 <div className="absolute inset-0 bg-background/50"></div>
-                 <BackgroundEffects />
+            <div
+                className={`absolute inset-0 transition-opacity duration-300 ${isScrolled ? "opacity-100" : "opacity-0"}`}
+            >
+                <div className="absolute inset-0 bg-background/50"></div>
+                <BackgroundEffects />
             </div>
-            
+
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="flex items-center justify-between h-14 md:h-16">
                     {/* Logo */}
